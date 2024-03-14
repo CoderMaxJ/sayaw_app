@@ -1,0 +1,52 @@
+{% extends "dashboard.html" %}
+{% load humanize %}
+
+{% block title %}|payment-approval/effective{% endblock  %}
+
+{% block payment_effective %}
+<br><br><br><br><br><br>
+
+<table>
+    <thead>
+        <th>First name</th>
+        <th>Lastname</th>
+        <th>Total bill</th>
+        <th>Balace bill</th>
+    </thead>
+    <tr>
+       {% if info %}
+        <td>{{info.guest_Name}}</td>
+        <td>{{info.guest_Lastname}}</td>
+        <td><i class="fa-solid fa-peso-sign "></i> {{info.total_bill}}</td>
+        <td><i class="fa-solid fa-peso-sign "></i> {{info.balance_bill}}</td>
+        {% endif %}
+        <td>{{guest.guest_name}}</td>
+        <td>{{guest.guest_lastname}}</td>
+        <td> {{guest.total_bill|intcomma}}</td>
+        
+        
+    </tr>
+</table>
+{% if info %}
+<center><p style="font-size:25px;">{{info.guest_Name}} {{info.guest_Lastname}} is paid for the amount of <span style="font-size:30px;"> <i class="fa-solid fa-peso-sign "></i> {{amount}}</span></p></center>
+<form action="{% url "reservation_App:goto_paidlist" %}" method="POST">
+    {% csrf_token %}
+    <br>
+<center><input type="submit" value="OK"></center>
+</form>
+{% endif %}
+<center><h3></h3></center>
+
+<form action="{% url "reservation_App:update-bill" %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" value="{{guest.transaction_code}}" name="transaction_code">
+    <label for="">Enter amount:</label>
+  
+    <input type="number" name="amount" style="height:60px; font-size:25px;">
+    
+    <input type="submit" value="Proceed">
+
+</form>
+
+
+{% endblock  %}

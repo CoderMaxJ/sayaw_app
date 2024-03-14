@@ -1,0 +1,98 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayaw Beach Resort</title>
+    <link rel="stylesheet" href="{% static 'css/view_room3.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <nav>
+        <div class="nav-links">
+            <a href="{% url "reservation_App:mainpage" %}">Home</a>
+            <a href="{% url "reservation_App:rooms" %}">Reservation</a>
+            <a href="{% url "reservation_App:code_verification" %}">Track Booking</a>
+            <a href="#">About Sayaw Beach</a>
+            <a href="{% url "reservation_App:chat" %}">Chat</a>
+        </div>
+     
+    </nav>
+
+    <main>
+      <br><br><br><br>
+       
+        <div class="room-storage">
+            {% for room in all_rooms %}
+                <div class="room-box">
+                    <a href="{% url 'reservation_App:view_photos' room.id %}">
+                        <img class="room-image" src="{{ room.front_view.url }}" alt="Room View">
+                    </a>
+                    <div class="room-details">
+                        <div class="link-box">
+                                {% if room.is_availlable %}
+                                <a class="link" href="{% url 'reservation_App:room_booking_view' room.id %}"><button class="book-now">Book now</button></a>
+                                {% else %}
+                                <a style="background-color:#0056b3" class="link" href="{% url 'reservation_App:view_photos' room.id%}"><button style="background-color:#0056b3" class="book-now">View</button></a>
+                                {% endif %}
+                        </div>
+                        <span class="service-status">
+                            {% if room.is_availlable %}
+                                <div class="available-box"><label class="available" style="color:green;">Available</label></div>
+                            {% else %}
+                                <div class="occupied-box"><label class="occupied">Occupied</label></div>
+                            {% endif %}
+                        </span>
+                        <p class="room-number">Room no. <span>{{ room.room_number }}</span></p>
+                        <p class="room-price">Room Price: <span>{{ room.room_price|intcomma }}</span> (24 hours)</p>
+                        <p class="room-description">{{ room.room_description }}</p>
+                    </div>
+                   
+                </div>
+            {% endfor %}
+        </div>
+<br>
+        <div class="room-storage">
+            {% for cottage in all_cottages %}
+                <div class="room-box">
+                    <a href="{% url "reservation_App:view_sayaw_cottage" cottage.id %}">
+                        <img class="room-image" src="{{ cottage.front_view.url }}" alt="sayaw">
+                    </a>
+                    <div class="room-details">
+                        <div class="link-box">
+                                {% if cottage.is_availlable %}
+                                <a class="link" href="{% url "reservation_App:cottage_booking" cottage.id%}"><button  class="book-now">Book now</button></a>
+                                {% else %}
+                                <a style="background-color:#0056b3" class="link" href="{% url 'reservation_App:view_photos' cottage.id%}"><button style="background-color:#0056b3" class="book-now">View</button></a>
+                                {% endif %}
+                        </div>
+                        <span class="service-status">
+                            {% if cottage.is_availlable %}
+                                <div class="available-box"><label class="available">Available</label></div>
+                            {% else %}
+                                <div class="occupied-box"><label class="occupied">Occupied</label></div>
+                            {% endif %}
+                        </span>
+                        <p class="room-number">Cottage no. <span>{{ cottage.cottage_number }}</span></p>
+                        <p class="room-price">Cottage Price: <span>{{ cottage.cottage_price|intcomma }}</span> (24 hours)</p>
+                        <p class="room-description">{{ cottage.cottage_description }}</p>
+                    </div>
+                   
+                </div>
+            {% endfor %}
+        </div>
+<br>
+      
+    </main>
+
+    <footer>
+        <!-- Footer content goes here -->
+    </footer>
+
+    <script src="{% static 'js/mainpage.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+
+{% extends "admin_dashboard.html" %}
+{% load static %}
+{% load humanize %}
+<head>
+    {% block title %}Update records{% endblock  %}
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard36.css' %}">
+</head>
+
+{% block update_records  %}
+<form action="{% url "reservation_App:update_records" guest.id %}" method="POST">
+    {% csrf_token %}
+<div class="main-container-guest">
+ 
+    <div class="m-5">
+        <h4 class="heading">Guest Information</h4>
+            <div class="row">
+                <label for="inputName">Guest Name:</label>
+                <input type="text" value="{{guest.guest_Name}}" name="firstname" class="form-control" id="inputName" placeholder="Enter Name" >
+            </div>
+
+            <div class="row">
+            <label for="inputName">Guest Lastname:</label>
+            <input type="text" value="{{guest.guest_Lastname}}" name="lastname" class="form-control" id="inputName" placeholder="Enter Lastname" >
+            </div>
+
+            <div class="row">
+                <label for="inputName">Guest Address:</label>
+                <input type="text" value="{{guest.guest_Address}}" name="address" class="form-control" id="inputName" placeholder="Enter Address" >
+            </div>
+
+            <div class="row">
+            <div class="col-lg-4">
+                <label for="inputName">No. of Guest:</label>
+                <input type="number" class="guest" value="{{guest.guest_Number}}" name="guest_no" class="form-control" id="inputName" placeholder="Enter the Number" >
+            </div>
+            <div class="col-lg-4">
+                <label for="inputName">No. of Child:</label>
+                <input type="number" value="{{guest.child_Guest}}" name="child_no" class="form-control" id="inputName" placeholder="Enter the Number" >
+            </div>
+            
+                <label for="">Other services:</label><br><br>
+                <label for="">With Cottage: </label> 
+                <select name="cottage" id="">
+                    {% if guest.cottage == "YES" %}
+                            <option value="YES" selected>YES</option>
+                            <option value="NONE">NONE</option>
+                    {% else %}
+                            <option value="NONE" selected>NONE</option>
+                            <option value="YES">YES</option>
+                       {% endif %}
+                </select><br><br><br>
+              
+    </div>
+</div>
+    <center>
+        <div style="width:100%; heigth:40px; background-color:lightblue;">
+              
+        </div>
+    </center>
+    <div class="room-identification">
+
+        <h4 class="heading">Room Identification</h4>
+        <div class="col-lg-4">
+            <label for="inputName">Room Name/No: </label>
+            <input type="number" value="{{guest.room_number}}" name="room_no" class="form-control" id="inputName"  >
+        </div>
+        <div class="col-lg-4">
+            <label for="inputName">Room Price:</label>
+            <input type="number" value="{{guest.room_Price|intcomma}}" name="room_price" class="form-control" id="inputName"  >
+        </div>
+        <div class="col-lg-4">
+            <label for="inputName">Gate Number:</label>
+            <input type="text" value="{{guest.gate_Number}}" name="gate_no" class="form-control" id="inputName" value="{{room.gate_number}}" >
+        </div>
+        <div class="col-lg-4">
+            <label for="">Date reserved:</label>
+            <input type="text" value="{{guest.date_Reserved}}" class="form-control" name="date_reserved" readonly >
+        </div>
+        <div class="col-lg-4">
+            <label for="">Time reserved:</label>
+            <input type="text" value="{{guest.time_Reserved}}" class="form-control" name="time_reserved" readonly >
+       
+        </div>
+        <div class="col-lg-4">
+            <label for="">Time In:</label>
+            <input type="text" value="{{guest.time_In}}" class="form-control" name="time_in" readonly>
+        </div>
+        <div class="col-lg-4">
+            <label for="">Time Out:</label>
+            <input type="text" value="{{guest.time_Out}}" class="form-control" name="time_out" readonly>
+        </div>
+        <div class="col-lg-4">
+            <label for="">Duration:</label>
+            <input type="number" value="{{guest.stay_Duration}}" class="form-control" name="duration" >
+        </div>
+        <div class="col-lg-4">
+            {% if  guest.is_paid %}
+            <label for="">Total bill: <span>{{guest.partial_paid|intcomma}}</span></label>
+            {% else %}
+          
+            <label for="">Total bill:</label>
+            {% if guest.balance_bill != 0 %}
+            <label for="">Balance bill: <span>{{guest.balance_bill|intcomma}}</span></label>
+            {% else %}
+            <input type="text" style="background-color:orange; font-size:24px;" value="{{guest.total_bill|intcomma}}" readonly >
+            {% endif %}
+            {% endif %}
+        </div>
+        
+    </div>
+   
+
+</div>
+<br><br><br><br><br>
+<center><button type="submit" style="margin-left:13px;background-color:#006b7f;" class="btn btn-succes">Update</button></center>
+</form>
+
+{% endblock  %}

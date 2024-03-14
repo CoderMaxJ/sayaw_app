@@ -1,0 +1,41 @@
+{% extends "dashboard.html" %}
+{% load static %}
+
+{% block title %}|Manage Account{% endblock  %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard36.css' %}">
+</head>
+
+{% block manage_account %}
+
+<br><br><br><br>
+<div class="button-div" >
+
+    <form action="{% url "reservation_App:manage_account" %}" method="POST">
+{% csrf_token %}
+        <br><br>
+    <input type="submit" name="create" value="Create account">
+     <input type="submit" name="Change" value="Change password">
+     <input type="submit" name="show" value="Show all account">
+     <input type="submit" name="delete" value="Delete account">
+ 
+  
+    </form>
+    <br><br>
+
+    {% if msg %}
+    <center>{{msg}}</center>
+    {% endif %}
+    {% if create %}
+    <center>
+  
+</center>
+    
+    
+    {% endif %}
+
+</div>
+
+
+{% endblock  %}

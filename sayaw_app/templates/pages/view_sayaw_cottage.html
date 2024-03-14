@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Sayaw Beach Resort</title>
+    <link rel="stylesheet" href="{% static "css/view_photos5.css"%}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+<body>
+
+<div class="swiper-container" >
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img data-id="{{cottage.id}}" src="{{cottage.front_view.url}}" alt="Sayaw view"></div>
+        <div class="swiper-slide"><img src="{{cottage.inside_view1.url}}" alt="Sayaw view"></div>
+        <div class="swiper-slide"><img src="{{cottage.inside_view2.url}}" alt="Sayaw view"></div>
+        <div class="swiper-slide"><img src="{{cottage.inside_view3.url}}" alt="Sayaw view"></div>
+    </div>
+
+    
+  
+</div>
+{% if cottage.is_availlable %}
+<center><p style="color:green;">Avallable</p></center>
+{% else %}
+<center><p style="color:red;">Occupied</p></center>
+{% endif %}
+<center><p>Room number: {{cottage.cottage_number}}</p></center>
+<center><p> Gate number: {{cottage.cottage_number}}</p></center>
+<center><p>Room price: {{cottage.cottage_price}}</p></center>
+<center><p>Description: {{cottage.cottage_description}}</p></center><br>
+</body>
+</html>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var mySwiper = new Swiper('.swiper-container', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+
+            // If you need pagination
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    });
+</script>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+{% load static %}
+{% load humanize %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest records and booking status</title>
+    <link rel="stylesheet" href="{% static 'css/guest_dashboard6.css' %}">
+</head>
+<body>
+
+
+    
+    <div class="main-container">
+        <div class="top-div">
+            <label for="" class="name">Name: </label><p>{{guest.guest_Name}} {{guest.guest_Lastname}}</p>
+            <label for="" class="address">Address: </label><p>{{guest.guest_Address}}</p>
+            <label for="" class="address">Booking Status: </label> {% if guest.is_paid == True %} <p style="color:green; margin-left:0px;">Approved</p> {% elif guest.is_cancel == True %} <p style="color:maroon;"> Requesting for cancellation </p> {% else %} <p>Pending</p> {% endif %}<p></p>
+           
+           
+        </div>
+        <div class="top-div">
+            <label for="" class="address">Message</label>
+            <a class="address" href="{% url "reservation_App:changeschedule" %}"><button>Change schedule</button></a>
+            {% if guest.partial_paid == guest.total_bill  %}
+            {% else %}
+            {% if guest.payment_method == 'Gcash' %}
+            
+            <p>Gcash #: <span>{{gcash}}</span></p>
+            {% else %}
+            <p>payMaya #: <span>{{paymaya}}</span></p>
+            {% endif %}
+            {% endif %}
+        </div>
+        <div class="sub-div">
+            <div class="side-div">
+                <div class="label-div">
+                    <br><br>
+                    <label for="" class="label-class">No. of Guests:</label><br><br>
+                    <label for="" class="label-class">Room Number:</label><br><br>
+                    <label for="" class="label-class">Room Price:</label><br><br>
+                    <label for="" class="label-class">Cottage number :</label><br><br>
+                    <label for="" class="label-class">Cottage price:</label><br><br>
+                    <label for="" class="label-class">Gate Number:</label><br><br>
+                    <label for="" class="label-class">Date In:</label><br><br>
+                    <label for="" class="label-class">Date Out:</label><br><br>
+                    <label for="" class="label-class">Stay Duration:</label><br><br>
+                    <label for="" class="label-class">Time In:</label><br><br>
+                    <label for="" class="label-class">Time Out:</label><br><br>
+                    <label for="" class="label-class">Payment Method:</label><br><br>
+                </div>
+
+                <div class="value-div">
+                    <br><br>
+                    <label for="">{{guest.guest_Number}}</label><br><br>
+                    <label for="">{{guest.room_number}}</label><br><br>
+                    <label for="">{{guest.room_Price|intcomma}}</label><br><br>
+                    <label for="">{{guest.cottage_number}}</label><br><br>
+                    <label for="">{{guest.cottage_price|intcomma}}</label><br><br>
+                    <label for="">{{guest.gate_Number}}</label><br><br>
+                    <label for="">{{guest.date_In}}</label><br><br>
+                    <label for="">{{guest.date_Out}}</label><br><br>
+                    <label for="">{{guest.stay_Duration}} days</label><br><br>
+                    <label for="">{{guest.time_In}}</label><br><br>
+                    <label for="">{{guest.time_Out}}</label><br><br>
+                    <label for=""> {{guest.payment_method}}</label><br><br>
+
+
+
+                </div>
+                
+                </div>
+            <div class="right-div">
+                <div class="child-div">
+                    <label for="">Total bill:</label> <p>{{guest.total_bill|intcomma}}</p>
+                    {% if guest.is_cancel == False %}
+                    {% if guest.is_fully_paid == False %}
+                    <button type="button" id="button" class="pay">Pay</button>
+                    {% else %}
+                    
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    {% if guest.is_fully_paid == True %}
+                    <p> Bill status: <span> <p style="color:blue;">Fully paid</p> </span> </p>
+                    {% elif guest.balance_bill != 0 %}
+                    <p>Balance: {{guest.balance_bill}}</p>
+                    {% endif %}
+                   
+                  
+                    
+                </div>
+
+                <div class="payment-container" style="display:none;" id="container">
+                    <form action="{% url "reservation_App:send_payment" %}" method="POST" enctype="multipart/form-data" id="pay-form">
+                        {% csrf_token %}
+                        <input type="hidden" id="guestName" value="{{guest.guest_Name}}" name="guestName"><br>
+                        <input type="hidden" name="guest_lastname" value="{{guest.guest_Lastname}}"><br>
+                        <input type="hidden" name="transaction_code" value="{{guest.transaction_Code}}"><br>
+                        <input type="hidden" name="total_bill" value="{{guest.total_bill}}">
+                        
+                        <label for="imageUpload" class="proof_label">Upload your proof of payment:</label><br><br><br>
+                        <input type="file" id="imageUpload" name="imageUpload"  required><br>
+                        <input type="hidden" name="total_bill" value="{{guest.total_bill}}">
+                        <br><br>
+                        <button type="submit" id="button_proceed">Proceed</button>
+                    </form>
+                   
+                </div>
+                {% if guest.is_cancel == True %}
+                <br><br><br>
+                <label for="">Sorry for your inconvenience we will process your cancellation as soon as possible. make sure to check your booking status so that you can rebook another schedule. Thank you :)</label>
+                {% endif %}
+            </div>
+        </div>
+      
+    </div>
+
+  
+ <script src="{% static 'js/guest_dashboard2.js' %}"></script>  
+</body>
+</html>

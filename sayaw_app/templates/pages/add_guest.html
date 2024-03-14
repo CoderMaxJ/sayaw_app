@@ -1,0 +1,128 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% load humanize %}
+
+<head>
+    {% block title %}|Add new guest{% endblock  %}
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard36.css' %}">
+</head>
+
+{% block add_guest %}
+
+<br><br><br><br><br>
+<form action="{% url "reservation_App:reset" %}" method="POST">
+    {% csrf_token %}
+<input style="margin-left:80%;" type="submit" name="set" value="Reset Room/Cottage">
+</form>
+
+{% if msg %}
+<center><label for="">{{msg}} <span>{{number}} set to availlable</span></label></center>
+{% endif %}
+
+{% if form %}
+
+<center>
+    <form action="{% url "reservation_App:updating" %}" method="POST">
+        {% csrf_token %}
+        <label for="">Select option</label>
+        <select name="option" id="">
+            <option value="">Choose option</option>
+            <option value="room" >Room</option>
+            <option value="cottage">Cottage</option>
+        </select>
+        <br><br>
+        <label for="">Enter the number: </label>
+        <input type="number" name="number" placeholder="0">
+        <br><br>
+        <button type="submit" name="one" style="margin-left:0px;background-color:#0056b3;width:20%;">Save</button>
+        <button type="submit" name="all" style="margin-left:0px;background-color:red;width:20%;">Set all to availlable</button>
+    </form>
+</center>
+
+{% else %}
+
+
+
+
+<form  action="{% url "reservation_App:add_guest" %}" method="POST" id="form">
+    {% csrf_token %}
+<div  ><br><br>
+    <label for="">Guest Name: {{fname}} {{lname}}</label><br><br>
+    <label for="">Total bill: <span style="font-size:30px;">{{total_bill|intcomma}}</span></label>
+    
+    <h2 class="heading" style="text-align: center; font-weight:bolder;">Guest Information</h2>
+    <div >
+        <label for="inputName" class="col-sm-2 col-form-label">Guest Name:</label>
+        <div  >
+            <input type="text" name="firstname" style="width:300px; font-size:17px;" id="inputName" placeholder="Enter Name" required >
+            <select name="room" id="" style="width:220px; font-size:17px;">
+                <option value="">Width Room</option>
+                {% for room in rooms %}
+                <option value="{{room.room_number}}">Room {{room.room_number}}</option>
+                {% endfor %}
+            </select>
+            <select name="cottage" id="" style="width:220px; font-size:17px;">
+                <option value="">With Cottage</option>
+                {% for cottage in cottages %}
+                <option value="{{cottage.cottage_number}}">Cottage {{cottage.cottage_number}}</option>
+                {% endfor %}
+            </select>
+            <select name="pool" id="" style="width:220px;font-size:17px;">
+                <option value="">With Pool</option>
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+          
+            
+        </div>
+        
+    </div>
+    <br>
+    <div class="mb-3 row">
+        <label for="inputAddress" class="col-sm-2 col-form-label">Guest Lastname:</label>
+        <div >
+            <input type="text" name="lastname" style="width:300px; font-size:17px;" id="inputName" placeholder="Enter Lastname" required>
+            <label for="inputAddress" style="margin-left:50px;" class="col-sm-2 col-form-label">12 years old below:</label>
+            <input type="checkbox" name="status" value='yes' style="height:25px; width:25px; ">
+            <label for="inputAddress" class="col-sm-2 col-form-label" style="margin-left:50px;">Senior:</label>
+            <input type="checkbox" name="status" value='yes'  style="height:25px; width:25px; ">
+            <label for="inputAddress" class="col-sm-2 col-form-label" style="margin-left:50px;">PWD:</label>
+            <input type="checkbox" name="status" value='yes'  style="height:25px; width:25px; ">
+        </div>
+    </div>
+    <div class="mb-3 row">
+        <label for="inputRemarks" class="col-sm-2 col-form-label">Guest Address:</label>
+        <div >
+            <input type="text" name="address" style="width:300px; font-size:17px;" id="inputName" placeholder="Enter Address" required>
+           <br><br>
+           <label for="">Nationality:</label><br>
+           <select name="tourist_nationality" id="" style="width:30%;font-size:17px;">
+            {% for nationality in all_nation %}
+            <option value="{{nationality.guest_nationality}}">{{nationality.guest_nationality}}</option>
+            {% endfor %}
+           </select>
+        </div><br><br>
+        <label for="">Day</label>
+        <input style="height:25px; width:25px; margin-left:17px;" value="day" type="radio" name="program" required><br><br>
+        <label for="">Night</label>
+        <input type="radio" style="height:25px; width:25px;" value="night" name="program" required>
+    </div>
+   
+      
+</div>
+
+
+
+<div style="width:100%; height:10vh; background-color:lightblue;"><br><br>
+ <center>  
+<button class="btn-add" style="padding:15px;">Add</button> <button style="background-color:red; padding:15px;" type="button">Clear</button>
+</center> 
+</div>
+
+</form>
+
+
+{% endif %}
+
+
+{% endblock  %}

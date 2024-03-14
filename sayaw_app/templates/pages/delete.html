@@ -1,0 +1,48 @@
+
+{% extends "dashboard.html" %}
+{% load static %}
+{% block title %}Delete records{% endblock  %}
+<head>
+  <link rel="stylesheet" href="{% static 'css/admin_dashboard36.css' %}">
+</head>
+
+{% block delete_records %}
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<div class="delete-div">
+    <div class="box">
+        <p>Are you sure you want to delete the records of</p>
+        <br><p id="record" value="{{guest.guest_Name}}">{{guest.guest_Name}} <span>{{guest.guest_Lastname}}</span> </p>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                <button type="submit" id="button" style="background-color:red;margin-left:10px; width:30%;" >Delete</button>
+                <a href="{% url "reservation_App:view_bookings" %}"><button>Cancel</button></a>
+            </form>
+
+        
+    </div>
+</div>
+
+<script>
+
+  function del(){
+    var name=document.getElementById("record").value;
+    alert("Record deleted successfully!!!")
+  }
+  
+  document.getElementById("button").addEventListener('click',function(){
+del()
+  })
+</script>
+
+{% endblock  %}
+
+

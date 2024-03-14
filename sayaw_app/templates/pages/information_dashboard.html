@@ -1,0 +1,45 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% load humanize %}
+
+
+{% block title %}|information dashboard{% endblock  %}
+<head>
+  <link rel="stylesheet" href="{% static 'css/admin_dashboard36.css' %}">
+       
+
+   
+</head>
+
+{% block info_dashboard  %}
+<br><br><br><br><br>
+<center><h2>Resort Collections</h2></center>
+<div class="info-container">
+    <div class="box">
+        <h2>Unpaid</h2>
+        <p class="amount"></p>
+    </div>
+    <div class="box">
+        <h2>Partially Paid</h2>
+        <p class="amount" >{{partial_paid}}</p>
+    </div>
+    <div class="box">
+        <h2>Fully Paid</h2>
+        <p class="amount"></p>
+    </div>
+    <div class="box">
+        <h2>Total Collected Amount</h2>
+        <p class="amount"></p>
+    </div>
+    <div class="box">
+        <h2>All bookings</h2>
+        <p class="amount">{{all_booking|intcomma}}</p>
+    </div>
+    <div class="box">
+        <h2>Number of Guests</h2>
+        <p class="amount">{{all_guest}}</p>
+        <p class="amount">Total: {{total_amount|intcomma}}</p>
+    </div>
+</div>
+
+{% endblock  %}

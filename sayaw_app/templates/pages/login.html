@@ -1,0 +1,38 @@
+{% load static %}
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <br><br><br><br><br><br><br>
+    <div class="container">
+        <form id="login-form" method="POST" action="{% url "reservation_App:login_process" %}">
+            {% csrf_token %}
+            <h2>Admin Login</h2>
+            <div class="input-container">
+               
+                {{form.as_p}}
+                <button type="submit">Login</button>
+            </div>
+           
+
+        </div>
+           <br><br> 
+           
+        
+        </form>
+    </div>
+</body>
+</html>
+
+
+<style>
+  
+</style>
+</body>
+</html>

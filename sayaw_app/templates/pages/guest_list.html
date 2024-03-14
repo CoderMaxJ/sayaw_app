@@ -1,0 +1,36 @@
+{% extends "dashboard.html" %}
+{% load static %}
+<head>
+{% block title %} |Guest records {% endblock  %}
+<link rel="stylesheet" href="{% static 'css/admin_dashboard36.css' %}">
+</head>
+
+
+
+
+{% block guest_list %} <br><br><br><br><br><br><br>
+<form action="{% url "reservation_App:export_to_word" %}" method="POST">
+    <input type="submit" style="background-color:blue;" value="Export to Word">
+    {% csrf_token %}
+</form>
+<table class="booking-table" style="margin-top:6vh">
+    <thead>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Address</th>
+        <th>Nationality</th>
+    </thead>
+   {% for guest in guest %}
+   <tr>
+    <td style="text-align:left;" class="{% cycle 'odd' 'even' %}">{{guest.guest_name}}</td>
+    <td style="text-align:left;" class="{% cycle 'odd' 'even' %}">{{guest.guest_lastname}}</td>
+    <td style="text-align:left;" class="{% cycle 'odd' 'even' %}">{{guest.guest_address}}</td>
+    <td style="text-align:left;" class="{% cycle 'odd' 'even' %}">{{guest.nationality}}</td>
+   </tr>
+   {% endfor %}
+</table>
+
+
+
+
+{% endblock  %}

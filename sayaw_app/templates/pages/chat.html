@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="{% static 'css/chat2.css'%}">
+</head>
+<body>
+   <form action="{% url "reservation_App:chat" %}" method="POST">
+    {% csrf_token %}
+<div class="main-div">
+  <div class="response-div">
+
+
+{% for result in response %}
+<p>{{result.data}}</p>
+
+{% endfor %}
+  
+  </div>
+
+
+  <div class="user-div">
+    
+{% for msg  in convo %}
+
+<p>{{msg.message}} <span style="margin-left:10%;">{% if status %}sent{% endif %}</span></p> 
+{% endfor %}
+
+
+
+  </div>
+
+
+</div>
+<div class="message">
+
+
+    <input type="text" name="ask" placeholder="...."  style="border-radius:4px;border:0.60px solid gray;outline:none;">
+    <input type="submit" value="send" name="Send">
+</div>
+</form>
+</body>
+</html>

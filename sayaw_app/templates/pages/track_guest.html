@@ -1,0 +1,82 @@
+{% extends "dashboard.html" %}
+
+{% load humanize %}
+<head>
+    {% block title %}|Track guest records{% endblock  %}
+
+
+</head>
+
+
+{% block track_records %}
+<br><br><br><br><br><br><br>
+<center><h1 style="margin-top:14vh;">Records Tracking</h1></center> 
+<div class="container-box" style="margin-top:2vh;display:flex;align-items:center;width:100%;">
+    
+    
+   
+    <form style="width:100%;" action=" {% url "reservation_App:track_records" %} " method="POST">
+  {% csrf_token %}
+    <input type="text" style="width:300px; margin-left:25%; font-size:21px;" placeholder="Enter Transaction code Ex. BxRT13s" value="{{query}}" name="query">
+<button style="margin-left:10px;width:200px; background-color:#006b7f; font-size:21px;" type="submit">Track now</button>
+</form>
+</div>
+<br><br>
+{% if guest %}
+
+<div style="height:70vh; width:100%; background-color:lightblue;display:flex; justify-content:center;">
+    <div style="width:35%; height:auto; " >
+        <label for="">Name:</label><br><br>
+        <label for="">Address:</label><br><br>
+        <label for="">No. of guest:</label><br><br>
+        <label for="">Room number:</label><br><br>
+        <label for="">Cottage number:</label><br><br>
+        <label for="">Date reserved:</label><br><br>
+        <label for="">Payment gateway</label><br><br>
+        <label for="">Total bill:</label><br><br>
+        <label for="">Partial pay:</label><br><br>
+      
+     
+
+
+    </div>
+    <div style="width:35%; height:auto;">
+       
+       <label for="">{{guest.guest_Name}} {{guest.guest_Lastname}}</label><br><br>
+       <label for="">{{guest.guest_Address}}</label><br><br>
+       <label for="">{{guest.guest_Number}}</label><br><br>
+       {% if guest.room_number != 0 %}
+       <label for="">{{guest.room_number}}</label> <br><br>
+       {% else %}
+       <label for="">None</label><br><br>
+       {% endif %}
+       {% if guest.cottage_number == 0 %}
+       <label for="">None</label><br><br>
+     {% else %}
+       <label for="">{{guest.cottage_number}}</label><br><br>
+       {% endif %}
+      
+       <label for="">{{guest.date_Reserved}}</label><br><br>
+       <label for="">{{guest.payment_method}}</label>
+       <label for="">{{guest.total_bill|intcomma}}</label><br><br>
+       <label for="">{{guest.partial_paid|intcomma}}</label><br><br>
+       {% if guest.total_bill == guest.partial_paid %}
+       <label for="">Fully paid</label>
+       {% else %}
+       <label for="">{{guest.partial_paid}}</label>
+       {% endif %}
+      
+      
+      
+     
+
+        <br><br><br><br>
+      <a style="font-size:14px;margin-left:10px;width:300px;padding-left:40px;padding-top:5px; padding-bottom:10px;border-radius:4px;font-family:sans-serif;height:20px; padding-right:40px; background-color:#006b7f;" href=" {% url "reservation_App:view_records" guest.id %} ">View</a>
+     
+
+    </div>
+    {% else %}
+<center><h3 >{{err}} <span style="color: green; font-size:24px;">{{code}}</span> </h3></center>
+    {% endif %}
+</div>
+{% endblock  %}

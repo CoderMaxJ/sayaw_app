@@ -1,0 +1,33 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% block title %}|Feedback{% endblock  %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard36.css' %}">
+</head>
+
+{% block feedback %}
+<br><br><br><br>
+<div class="feedback-box">
+{% if message %}
+<center><p>Message {{message}} {{subject.guest_Name}}</p></center><br><br><br>
+
+
+
+{% elif msg %}
+<p>{{msg}}</p>
+{% endif %}
+
+<form action="{% url "reservation_App:send-now" %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="code" value="{{guest.transaction_code}}">
+    <center><textarea placeholder="Write your message here ->" name="message" id="" cols="20" rows="15"></textarea></center><br><br>
+    
+    <center><button style="margin-left:0px; background-color:blue; width:20%;" type="submit">Send</button></center>
+</form>
+
+</div>
+
+
+
+{% endblock  %}

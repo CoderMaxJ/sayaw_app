@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sayaw Beach Resort</title>
+    <link rel="stylesheet" href=" {% static 'css/landingpage.css'%} ">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body >
+    <nav>
+        <div style="width:100%;">
+            <a href="#">Home</a>
+            <a href="{% url "reservation_App:rooms" %}">Reservation</a>
+            <a href="{% url "reservation_App:code_verification" %}">Track Booking</a>
+            <a href="{% url "reservation_App:chat" %}">Chat </a>
+            <a  href="{% url "reservation_App:track-code" %}">Forgot code</a>
+           
+           
+         
+        </div>
+        <img src="static/images/barili_logo.jpg" style="border-radius:50%; margin-right:2%;" width="80" height="80" alt="" >
+        <img src="static/images/sayawofficial_logo.jpg" width="80" height="80" alt="" style="border-radius:50%;margin-right:5%;">
+        <div class="user-icon" style="width:300px;margin-right:1px;">
+            <i class="fa-solid fa-user fa-lg" style="color: white;"></i>
+            <a href="{% url "reservation_App:login_process" %}">Admin</a> 
+            
+           
+        </div>
+    </nav>
+ 
+    <main>
+        <div class="image-divider">
+            
+
+            <h1 class="header-title" id="text">Sayaw Beach Resort</h1>
+        </div> <br>
+       <p style="font-size:19px;font-family:sans-serif;margin-left:30px;color:gray;">Sayaw offers you a very affordable entrance fee</p>
+       <ul>
+        <li style="font-size:19px;font-family:sans-serif;margin-left:30px;color:gray;">For adults: 40 pesos </li>
+        <li style="font-size:19px;font-family:sans-serif;margin-left:30px;color:gray;">For below 12 years old: 20 pesos</li>
+        <li style="font-size:19px;font-family:sans-serif;margin-left:30px;color:gray;">We give 20% discount for PWD, Senior citizen</li>
+       </ul>
+      <div style="height:100vh;">
+        <br><br><br>
+        <p class="discription">
+         Welcome Sayaw beach resort a coastal paradise where the sun-kissed sands meet the azure embrace of the endless sea – a beach that beckons with the promise of an unforgettable escape. Picture yourself stepping onto a pristine stretch of golden shore, where each grain of sand seems to glisten under the warm caress of the sun.
+
+As you venture closer to the water's edge, the rhythmic melody of gentle waves serenades your senses, creating a symphony of relaxation that instantly transports you to a state of tranquil bliss. The sea unfolds like a vast, shimmering tapestry, revealing hues of turquoise and sapphire that seamlessly blend with the cerulean sky above.
+        </p>
+                   <br>
+                    <div class="sayaw-image">
+                       
+
+                    </div><br><br>
+
+        <p class="discription">
+            This beach, a sanctuary of serenity and adventure, invites you to write your own story – whether it's building sandcastles with loved ones, indulging in delectable seaside cuisine, or simply relishing the joy of being present in this coastal oasis. Welcome to a place where the tides of tranquility and the allure of adventure converge, creating an experience that will linger in your heart long after the sun has dipped below the horizon.
+        </p>
+        <br>
+                    <div class="sayaw-image2">
+                        <img  class="mini-image" src="static/images/pool1.jpg" alt="" height="250" width="250">
+                        <img src="static/images/pool2.jpg" class="mini-image"  height="200" width="200" alt="">
+                        <img src="static/images/pool3.jpg" class="mini-image"  height="200" width="200" alt="">
+                        <img src="static/images/pool4.jpg" class="mini-image"  height="200" width="200" alt="">
+
+                     </div><br><br>
+
+            <p class="discription">For those seeking tranquility, find solace in the shade of swaying palms, their fronds creating a gentle canopy that invites you to unwind with a good book or simply bask in the glory of the moment. As the day unfurls, the beach transforms into a canvas for breathtaking sunsets, each evening painting the sky in a palette of fiery oranges, pinks, and purples that reflect upon the calm waters below.</p>
+            <br>
+            <div class="sayaw-image3" >
+
+                <img  class="mini-image" src="static/images/room1.jpg" alt="" height="200" width="200">
+                <img src="static/images/room2.jpg" class="mini-image"  height="200" width="200" alt="">
+                <img src="static/images/room3.jpg" class="mini-image"  height="200" width="200" alt="">
+                <img src="static/images/room4.jpg" class="mini-image"  height="200" width="200" alt="">
+             </div>
+             <br><br>
+            
+
+            
+          
+
+
+           
+
+
+
+
+
+
+
+
+                    <footer>
+                        <div class="footer-div">
+                            <img src="static/images/barili_logo.jpg" style="border-radius:50%; margin-right:2%;" width="80" height="80" alt="" >
+                           <h1>Barili beauty and beyond</h1>
+                           
+                            <img src="static/images/sayawofficial_logo.jpg" width="80" height="80" alt="" style="border-radius:50%;margin-right:5%; margin-left:40px;">
+                            <a class="link" style="color:darkblue;; text-decoration:none; font-family:helvetica;" href="https://www.facebook.com">Visit our facebook page</a>
+                            <a class="link" style="color:darkblue;; text-decoration:none; font-family:helvetica; margin-left:40px;" href="https://www.barilitourismoffice.com">Barili Tourism office</a>
+                            <a class="link" style="color:darkblue;; text-decoration:none; font-family:helvetica; margin-left:40px;" href="https://www.barilitourismoffice.com">Mantayupan falls</a>
+                        </div>
+                    </footer>
+
+       
+    </main>
+
+
+
+
+  <script src="{% static 'js/mainpage3.js'%}"></script>
+</body>
+</html>

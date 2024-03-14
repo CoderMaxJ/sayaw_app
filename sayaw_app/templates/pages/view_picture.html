@@ -1,0 +1,15 @@
+{% extends "admin_dashboard.html" %}
+{% load static %}
+<head>
+{% block title %} View_proof {% endblock  %}
+<link rel="stylesheet" href="{% static 'css/admin_dashboard36.css' %}">
+</head>
+
+{% block view_proof %}
+<br><br><br><br><br><br><br>
+<a style="font-family:sans-serif;background-color:#369090;border-radius:4px; margin-left:83%; padding-left:50px;padding-right:50px;padding-top:9px;padding-bottom:9px;" href="{% url "reservation_App:payment-effective" guest.id%}">Recieve</a><br><br>
+
+<img class="proof-picture" src="{{guest.payment_proof.url}}" alt="">
+
+
+{% endblock  %}

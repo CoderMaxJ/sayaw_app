@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking code</title>
+    <link rel="stylesheet" href="{% static 'css/forgot_code.css'%}">
+</head>
+<body>
+    <br><br><br><br>
+    <center><h1> Hello' let me help you to get your code back :)</h1></center>
+    {% if msg %}
+    <center><h1>{{msg}} </h1></center><br>
+    <center><h1 >your code is: <span id="transaction-code" style="color:orange;" > {{code.transaction_Code}}</span> </h1></center><br>
+    <center><button type="buton" onclick="copyToClipboard()">Copy code</button></center>
+<br><br><br><br>
+    <center><a style="font-size:23px;text-decoration:none;color:white;" href="{% url "reservation_App:mainpage" %}">Back</a></center>
+    {% else %}
+    <center><h3 style="color:red;">{{err}}</h3></center>
+
+  
+   
+    <center>
+    <div class="main-container">
+        <form action="{% url "reservation_App:track-code" %}" method="POST">
+            {% csrf_token %}
+        <label for="">What is your firstname?</label>
+        <input type="text" name="fname" placeholder="E.g: Johnsen"> <br><br>
+        <label for="">What is you lastname?</label>
+        <input type="text" name="lname" placeholder="E.g: Sopeta"><br><br><br>
+        <center><h1></h1></center>
+        <br><br><br>
+        <center><button type="submit">Find now</button></center>
+
+
+    </form>
+
+    </div>
+</center>
+{% endif %}
+
+
+<script>
+    function copyToClipboard() {
+        var transactionCodeElement = document.getElementById('transaction-code');
+        var transactionCode = transactionCodeElement.textContent || transactionCodeElement.innerText;
+    
+        // Trim whitespace
+        transactionCode = transactionCode.trim();
+    
+        // Copy to clipboard
+        var tempInput = document.createElement('input');
+        tempInput.value = transactionCode;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+    
+        // Alert for debugging
+        alert('Code copied to clipboard: ' + transactionCode);
+    }
+    
+</script>
+</body>
+</html>

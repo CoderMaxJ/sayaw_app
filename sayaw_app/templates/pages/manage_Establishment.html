@@ -1,0 +1,245 @@
+
+{% extends "dashboard.html" %}
+{% load static %}
+
+{% block title  %}||manage_establishment{% endblock  %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard36.css' %}">
+    
+</head>
+<br><br><br><br><br>
+
+<div class="button-div" >
+
+    <form action="{% url "reservation_App:manage_establishment" %}" method="POST">
+{% csrf_token %}
+        <br><br>
+    <input type="submit" name="establishment" value="Add room/cottage">
+     <input type="submit" name="remove" value="Remove room/cottage">
+     <input type="submit" name="update" value="Update Establishment">
+     <input type="submit" name="add" value="Add Nationality">
+     <input type="submit" name="data_load" value="Load Chatbot Data">
+     <input type="submit" name="phone_number" value="Insert number">
+     
+     
+    
+    </form>
+
+</div>
+{% if chatbot_success %}
+<center><h2>{{chatbot_success}}</h2></center>
+{% endif %}
+
+
+
+{% if remove %}
+<form action="{% url "reservation_App:remove-services" %}" method="POST">
+{% csrf_token %}
+
+
+<label for="">Select option</label><br>
+<select name="services" id="">
+    <option value="">Select</option>
+    <option value="room">Room</option>
+    <option value="cottage">Cottage</option>
+  
+</select><br>
+<label for="">Enter the number:</label>
+<input type="number" name="number"><br><br>
+<center><button type="submit" style="background-color:red;margin-left:10px;width:20%;padding:15px;">Delete</button></center>
+</form>
+
+{% elif phone_number %}
+
+<center><form action="{% url "reservation_App:insert" %}" method="POST">
+    {% csrf_token %}
+
+    <label for="">Gcash number: </label> <input type="number" name="gcash"><br><br>
+    <label for="">payMaya number: </label> <input type="number" name="paymaya">
+    <center><button type="submit" style="width:30%; margin-left:0px; background-color:#333; " > Save </button></center>
+</form></center>
+{% elif add %}
+<div style="width:100%;height:20vh;background-color:gainsboro;">
+    <center><h2>Add new Nationality</h2></center>
+    <center><form action="{% url "reservation_App:add-nationality" %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="nationality" style="font-size:17px;width:50%;" required><br><br>
+       <center> <input style="width:50%;" type="submit" value="Add"></center>
+    </form></center>
+</div>
+
+{% elif update %}
+<center><h2>Update Establishment</h2></center><br><br>
+<form action="{% url "reservation_App:update-services" %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <select name="services" id="">
+        <option value="">Select option</option>
+        <option value="room">Room</option>
+        <option value="cottage">Cottage</option>
+        <option value="table">Table</option>
+    </select><br><br>
+    <label for="">Enter number</label><br>
+    <input type="number" name="number" placeholder="number"><br>
+    <label for="">Gate number:</label><br>
+    <input type="number" name="gate_number" placeholder=" New gate number"><br>
+    <label for="">Price</label><br>
+    <input type="number" placeholder=" New price" name="price"><br>
+    <label for="">Image 1</label> <input style="background-color:whitesmoke;" type="file" name="image1" ><br><br>
+    <label for="">Image 2</label> <input style="background-color:whitesmoke;" type="file" name="image2" ><br><br>
+    <label for="">Image 3</label> <input style="background-color:whitesmoke;"  type="file" name="image3"><br><br>
+    <label for="">Image 4</label> <input style="background-color:whitesmoke;" type="file" name="image4"><br><br>
+    <label for="">Description:</label>
+    <textarea name="description" id="" cols="30" rows="10" placeholder="Description"></textarea><br><br><br>
+    <center><button type="submit" style="margin-left:10px;background-color:#006b7f;">Update</button></center>
+</form>
+
+{% elif data_load %}
+<form action="{% url "reservation_App:data-loading" %}" method="POST">{% csrf_token %}
+    <center><h1>Load Data</h1></center><br><br><br>
+    <center><textarea name="data" id="" cols="30" rows="10"></textarea> </center><br><br>
+   <center> <button type="submit" style="background-color:green; margin-left:0px;padding:13px;">LOAD</button></center>
+</form>
+{% elif establishment %}
+
+
+
+    <div class="main-div" style="display:flex;justify-content:space-evenly;">
+
+        <div class="room-div-property" style="width:50%;">
+     
+        <form action="{% url "reservation_App:add_room" %}" method="POST"   enctype="multipart/form-data">
+            {% csrf_token %}
+            <center><label for="">{{room_success_message}}</label></center>
+           <center><h3>Add Room</h3></center>
+                <label for="">Room Number:</label><br>
+                <input type="number" name="room_number" required placeholder="Room Number"><br>
+                <br>
+                <select name="gate_number">
+                    <option value="" required>Select gate number</option>
+                    <option value="Gate 1">Gate 1</option>
+                    <option value="Gate 2">Gate 2</option>
+                </select><br>
+                <label for="">Room Price:</label><br>
+                <input type="number" name="room_price" placeholder="Room Price" required>
+            <br>
+                <div class="input-group">
+                    <label for="file">Upload Image (PNG, JPG, JPEG):</label><br>
+                    <label for="">Image 1</label>
+                    <input type="file"  id="p1" name="p1"><br>
+                    <label for="">Image 2</label>
+                    <input type="file" id="p2" name="p2"  required><br>
+                    <label for="">Image 3</label>
+                    <input type="file" id="p3" name="p3"  required><br>
+                    <label for="">Image 4</label>
+                    <input type="file" id="p4" name="p4"  required><br>
+                    <label for="">Description:</label>
+                    <textarea name="description" id="" cols="30" rows="10" placeholder="Room Description"></textarea>
+                </div>
+                        <div class="btn-div">
+                            <button type="submit" style="margin-left:0px;background-color:#6fa9b7;width:40%;" class="btn-submit">Add now</button>
+                            <button type="button" class="btn-cancel" style="width:40%;">Cancel</button>
+                        </div>
+                        
+        </form>
+    </div>
+    <div class="room-div-property" style="width:50%;" >
+        <center><h3>Add Cottage</h3></center>
+     
+        <form action="{% url "reservation_App:add_cottage" %}" method="POST"   enctype="multipart/form-data">
+            {% csrf_token %}
+            <center><label for="">{{cottage_success_message}}</label></center>
+          
+                <label for="name">Cottage Number:</label>
+                <input type="number" id="cottage_number" name="cottage_number" placeholder="Cottage Number" required>
+                <br><br>
+                <select name="gate_number">
+                    <option value="" required>Select gate number</option>
+                    <option value="Gate 1">Gate 1</option>
+                    <option value="Gate 2">Gate 2</option>
+                </select><br>
+                <label for="">Cottage Price</label>
+                <input type="number" name="cottage_price" id="cottage_price" placeholder="Cottage Price" required>
+                <div class="input-group">
+                    <label for="file">Upload Image (PNG, JPG, JPEG):</label><br>
+                    <label for="">Image 1</label>
+                    <input type="file" id="p1" name="p1"  required><br>
+                    <label for="">Image 2</label>
+                    <input type="file" id="p1" name="p2"  required><br>
+                    <label for="">Image 3</label>
+                    <input type="file" id="p1" name="p3"  required><br>
+                    <label for="">Image 4</label>
+                    <input type="file" id="p1" name="p4"  required><br>
+                    <label for="">Description</label>
+                    <textarea name="description" id="" cols="30" rows="10" placeholder="Cottage Description"></textarea>
+                </div>
+            
+                    <div class="btn-div">
+                        <button type="submit" style="margin-left:0px;background-color:#6fa9b7;width:40%;" class="btn-submit">Add now</button>
+                        <button type="button" class="btn-cancel" style="width:40%;">Cancel</button>
+                    </div>
+        </form>
+    </div>
+   
+    </div>
+ 
+    {% endif %}
+   {% if msg %}
+    <center><h3>{{nationality}} <span>{{msg}}</span></h3></span></center>
+    <center> <form action="{% url "reservation_App:refresher" %}" method="POST">
+        {% csrf_token %}
+     <button type="submit" style="background-color:lightblue;width:30%;margin-left:0px;border:1px solid green;">Okay</button><br><br>
+    </form>
+</center> 
+{% elif remove_msg %}
+<center><h3>{{nationality}} <span>{{msg}}</span></h3></span></center>
+<center> <form action="{% url "reservation_App:refresher" %}" method="POST">
+    {% csrf_token %}
+    <center><h3>{{remove_msg}} <span>{{id}} remove from services</span></h3></center>
+ <button type="submit" style="background-color:lightblue;width:30%;margin-left:0px;border:1px solid green;">Okay</button><br><br>
+</form>
+</center> 
+{% elif room_success_message %}
+
+<center><h3>{{room_success_message}}</h3></center><br>
+<center> <form action="{% url "reservation_App:refresher" %}" method="POST">
+    {% csrf_token %}
+ <button type="submit" style="background-color:lightblue;width:30%;margin-left:0px;border:1px solid green;">Okay</button><br><br>
+</form>
+</center>
+{% elif cottage_success_message %}
+
+<center><h3>{{cottage_success_message}}</h3></center><br>
+<center> <form action="{% url "reservation_App:refresher" %}" method="POST">
+    {% csrf_token %}
+ <button type="submit" style="background-color:lightblue;width:30%;margin-left:0px;border:1px solid green;">Okay</button><br><br>
+</form>
+</center>
+
+{% elif room_update_msg %}
+    <center><h3>{{room_update_msg}} <span>{{number}} updated successfully</span></h3></center>
+    <center> <form action="{% url "reservation_App:refresher" %}" method="POST">
+        {% csrf_token %}
+     <button type="submit" style="background-color:lightblue;width:30%;margin-left:0px;border:1px solid green;">Okay</button><br><br>
+    </form>
+</center>
+{% elif cottage_update_msg %}
+<center><h3>{{cottage_update_msg}} <span>{{number}} updated successfully</span></h3></center><br>
+<center> <form action="{% url "reservation_App:refresher" %}" method="POST">
+    {% csrf_token %}
+ <button type="submit" style="background-color:lightblue;width:30%;margin-left:0px;border:1px solid green;">Okay</button><br><br>
+</form>
+</center>
+{% elif suc %}
+<center><label for="">{{suc}}</label></center>
+{% elif table_update_msg %}
+<center><h3>{{table_update_msg}} <span>{{number}} updated successfully</span></h3></center><br>
+<center> <form action="{% url "reservation_App:refresher" %}" method="POST">
+    {% csrf_token %}
+ <button type="submit" style="background-color:lightblue;width:30%;margin-left:0px;border:1px solid green;">Okay</button><br><br>
+</form>
+</center>
+    {% endif %}
+  
+{% endblock  %}

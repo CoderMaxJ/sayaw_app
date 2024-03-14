@@ -1,0 +1,120 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard  {% block title %}{% endblock  %}</title>
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/dashboard1.css' %}">
+</head>
+
+
+<body>
+    <center><h1 id="msg" style="display:none; color:red;">This website is protected and maintained by developer! Please refrain from unauthorize access !!! </h1></center>
+    <center><img id="lock" style="display:none;" src="/static/images/lock1.png" alt="" width="500" height="500"></center>
+    <div class="title"  id="title">
+
+    <header>
+        <center><h1 class="header-text">Admin Dashboard</h1></center>
+    </header>
+
+    </div>
+    
+   {% comment %} <input class="search" type="search" placeholder="Search"><i class="fa-solid fa-magnifying-glass-location" style=" margin-left:3px;font-size:25px;color:whitesmoke;"></i>  {% endcomment %}
+    
+     <div class="main-container" id="main-container">
+
+        <aside>
+            
+            <div class="sidebar" id="sidebar">
+                
+              <br>
+               
+                <section id="add-tourist">
+                    <i class="fas fa-user-plus fa-lg" style="color:white;"></i> <a href="{% url "reservation_App:add_guest" %}">Add Guest</a>
+                </section>
+                <br>
+               
+                <section>
+                    <i style="color:white;" class="fas fa-code fa-lg"></i> <a href="{% url "reservation_App:track_records" %}">Track Reference code</a>
+                </section>
+                <br>
+                    <section>
+                      
+                        <i class="fa-solid fa-arrow-rotate-left fa-lg" style="color:white;"></i>  <a href="{% url "reservation_App:cancel-list" %}">Change Schedule</a>
+                    </section>
+
+             
+                <br>
+                <section>
+                    <i class="fa-regular fa-address-book fa-xl" style="color:white;" ></i> <a href="{% url "reservation_App:view_bookings" %}">View Bookings</a>
+                </section><br>
+                <section>
+                    <i class="fa-solid fa-money-bill fa-xl" style="color:white;"></i> <a  href="{% url "reservation_App:payments_viewing" %}">Down Payments</a>
+                </section>
+                <br>
+                <section>
+                    <i class="fa-solid fa-house-user fa-xl" style="color:white;"></i> <a href="{% url "reservation_App:manage_establishment" %}">Manage operations</a>
+                </section>
+                <br>
+                <section>
+                    <i class="fa-regular fa-rectangle-list fa-xl" style="color:white;" ></i>   <a href="{% url "reservation_App:guest_list" %}">Montly report</a>
+                </section>
+                <br>
+                {% if user.is_superuser %}
+                <section>
+                    <i style="color:white;" class="fa-solid fa-gear fa-xl"></i>  <a href="{% url "reservation_App:manage_account" %}">Manage Account</a>
+                </section>
+                <br>
+                <section>
+                    <i class="fa-solid fa-coins fa-xl" style="color:white;" ></i> <a href="{% url "reservation_App:information_dashboard" %}">Collections</a>
+                </section>
+                {% endif %}
+                
+            </div>
+
+        </aside>
+
+   
+    <div class="main-content">
+       
+        <form action="" method="POST" id="myform" >
+            {% csrf_token %}
+            <input type="hidden" id="text" value="{{user.username}}" name="user" onchange="this.form.submit()">
+            <button  type="submit" id="button-click" style="visibility:hidden; width:100%;background-color:blue;">Test</button>
+    
+        </form>
+{% block payment_viewing %}{% endblock  %}
+{% block view_records %}{% endblock  %}
+ {% block content %}{% endblock  %}
+ {% block view_proof %}{% endblock view_proof %}
+ {% block specific_guest_records %}{% endblock  %}
+ {% block delete_records %}{% endblock  %}
+ {% block update_records %}{% endblock  %}
+ {% block add_guest %}{% endblock  %}
+ {% block track_records %}{% endblock  %}
+ {% block guest_list %}{% endblock  %}
+ {% block cancel_bookings %}{% endblock  %}
+ {% block payment_effective %}{% endblock  %}
+ {% block feedback %}{% endblock  %}
+ {% block manage_account %}{% endblock  %}
+ {% block create_account %}{% endblock  %}
+ {% block info_dashboard %}{% endblock  %}
+    </div>
+    
+<br><br>
+
+
+</div>
+<div>
+ 
+</div>
+
+<script src="{% static 'js/admin_dashboard3.js'%}"></script>
+</body>
+
+
+</html>

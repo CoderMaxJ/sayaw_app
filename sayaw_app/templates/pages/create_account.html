@@ -1,0 +1,62 @@
+{% extends "dashboard.html" %}
+
+
+{% load static %}
+        
+
+
+{% block title %}|Create Account{% endblock  %}
+
+{% block create_account %}
+<br><br><br><br><br>
+ <!-- Your HTML template file -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Registration Form</title>
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard36.css' %}">
+</head>
+<body>
+{% if msg %}
+<center><h3>{{msg}}</h3></center>
+{% else %}
+
+<div class="registration-form-container">
+    <form method="post" class="registration-form">
+        {% csrf_token %}
+        
+        <div class="registration-form-field">
+            <label for="{{ form.username.id_for_label }}" class="registration-form-label">Username:</label>
+            {{ form.username }}
+        </div>
+
+        <div class="registration-form-field">
+            <label for="{{ form.password.id_for_label }}" class="registration-form-label">Password:</label>
+            {{ form.password }}
+        </div>
+
+        <div class="registration-form-field">
+            <label for="{{ form.confirm_password.id_for_label }}" class="registration-form-label">Confirm Password:</label>
+            {{ form.confirm_password }}
+        </div>
+            <br><br><br>
+        <div class="registration-form-field">
+            <label class="registration-form-label">Posistion:</label><br><br>
+            {{ form.staff }} <span class="registration-form-checkbox">Staff</span><br>
+            {{ form.superadmin }} <span class="registration-form-checkbox">Super Admin</span>
+        </div>
+        <br><br><br>
+        <button style="width:20%;margin-left:0px; background-color:#0056b3;" type="submit">Create</button>
+    </form>
+</div>
+{% endif %}
+</body>
+</html>
+
+
+    {% endblock  %}
+
+

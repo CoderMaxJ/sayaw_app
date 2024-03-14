@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Sayaw Beach Resort</title>
+    <link rel="stylesheet" href="{% static "css/view_photos3.css"%}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+</head>
+<body>
+
+<div class="swiper-container" >
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img data-id="{{room_view.id}}" src="{{room_view.front_view.url}}" alt=""></div>
+        <div class="swiper-slide"><img src="{{room_view.inside_view1.url}}" alt=""></div>
+        <div class="swiper-slide"><img src="{{room_view.inside_view2.url}}" alt=""></div>
+        <div class="swiper-slide"><img src="{{room_view.inside_view3.url}}" alt=""></div>
+    </div>
+
+    
+  
+</div>
+
+</body>
+</html>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var mySwiper = new Swiper('.swiper-container', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+
+            // If you need pagination
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    });
+</script>

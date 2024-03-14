@@ -1,0 +1,78 @@
+{% extends "dashboard.html" %}
+{% load static %}
+
+
+
+
+<head>
+    <!-- Add Bootstrap CSS link -->
+    
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Add Bootstrap JavaScript and Popper.js (if needed) -->
+
+<link rel="stylesheet" href="{% static 'css/admin_dashboard36.css' %}">
+</head>
+{% block title %}||View Records{% endblock  %}
+
+{% block view_records %}
+<form action="{% url "reservation_App:view_bookings" %}" method="GET">
+    <input type="search" value="{{input}}" placeholder="Search  lastname..." name="input_value">
+   </form>
+
+<table class="booking-table">
+   
+    <thead>
+     <th>Guest ID</th>
+     <th>Guest Name</th>
+     <th>Guest Lastname</th>
+     <th style="text-align:center;">Guest Address</th>
+    <th>Guest No.</th>
+     <th>Room No.</th>
+     <th>Action</th>
+     <th>View record</th>
+ </thead>
+ 
+    
+ <tbody>
+
+
+    {% if records %}
+    {% for record in records %}
+   <br><br><br><br><br><br>
+    <tr> 
+        <td class="{% cycle 'odd' 'even' %}" >{{record.id}}</td> 
+        <td class="{% cycle 'odd' 'even' %}" >{{record.guest_Name}}</td>
+        <td class="{% cycle 'odd' 'even' %}" >{{record.guest_Lastname}}</td>
+        <td class="{% cycle 'odd' 'even' %}" >{{record.guest_Address}}</td>
+        <td class="{% cycle 'odd' 'even' %}" >{{record.guest_Number}}</td>
+        <td class="{% cycle 'odd' 'even' %}" >{{record.room_number}}</td>
+        <td  ><a class="edit" href="{% url "reservation_App:update_view" record.pk %}">Edit</a><a class="delete" href="{% url "reservation_App:delete_record" record.id %}">Delete</a></td>
+        <td  ><a  class="view" href="{% url "reservation_App:view_records" record.id %}">View</a></td>
+
+    </tr>
+
+    {% endfor %}
+
+    {% elif query %}
+
+    {% for record  in query %}
+    <tr> 
+        <td class="{% cycle 'odd' 'even' %}" >{{record.id}}</td> 
+        <td class="{% cycle 'odd' 'even' %}" >{{record.guest_Name}}</td>
+        <td class="{% cycle 'odd' 'even' %}" >{{record.guest_Lastname}}</td>
+        <td class="{% cycle 'odd' 'even' %}" >{{record.guest_Address}}</td>
+        <td class="{% cycle 'odd' 'even' %}" >{{record.guest_Number}}</td>
+        <td class="{% cycle 'odd' 'even' %}" >{{record.room_number}}</td>
+        <td class="{% cycle 'odd' 'even' %}" ><a class="edit" href="{% url "reservation_App:update_view" record.pk %}">Edit</a><a class="delete" href="{% url "reservation_App:delete_record" record.id %}">Delete</a></td>
+        <td class="{% cycle 'odd' 'even' %}" ><a class="view" href="{% url "reservation_App:view_records" record.id %}">View</a></td>
+
+    </tr>
+    
+    {% endfor %}
+    {% else %}
+    <tr>
+       <center><td style="color:red;">No records found</td></center>
+    </tr>
+    {% endif %}
+</tbody>
+{% endblock  %}
