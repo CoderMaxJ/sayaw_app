@@ -1,142 +1,95 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.rtl.min.css"
-        integrity="sha384-PRrgQVJ8NNHGieOA1grGdCTIt4h21CzJs6SnWH4YMQ6G5F5+IEzOHz67L4SQaF0o" crossorigin="anonymous"> {% endcomment %}
-        <link rel="stylesheet" href="{% static 'css/reservation_form12.css'%}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Reservation form for guest</title>
-
+  
+    
 </head>
-
-
 <body>
     <div style="width:100%;height:7vh;margin-top:0px; background-color:#0f3446;padding-top:20px;padding-bottom:20px;display:flex;justify-content:center;align-items:center;">
         <h1 class="heading" style="text-align: center; font-weight:bolder;color:white;margin-left:0px;">Sayaw Reservation Form</h1>
     </div>
   
-{% if success_msg %}
-
-       <div class="thank-you-container" id="confirmation-box" >
-            <div class="thank-you-message" id="thankyou-msg" >
-               
-               
-
-                <h1 >Thank you for choosing  Sayaw Beach Resort</h1>
-                  <h1>  as your favorite destination</h1>
-                <p>We appreciate your interest! Your booking will be processed shortly.</p>
-                <p>Top your transaction code to copy and use it to check your booking status.</p>
-                <p>Make sure to deposit 50% of your bill as a down payment to avoid your booking status pending</p>
-                <h1 ><span style="background-color:lightgray; border:0.60px solid green; width:150px;border-radius:4px;" id="transaction_code">{{transaction_code}}</span> </h1>
+    {% if success_msg %}
+        <div class="container-fluid w-100 vh-75  mt-5" id="confirmation-box">
+            <div class="container-fluid w-100 vh-100 bg-light mt-5 border border  rounded" id="thankyou-msg" style="text-align:center;">
+                <h1>Thank you for choosing  Sayaw Beach Resort</h1>
+                <h1>as your favorite destination</h1><br><br>
+                <p class="fs-3  ">We appreciate your interest! Your booking will be processed shortly.</p>
+                <p class="fs-3">Top your transaction code to copy and use it to check your booking status.</p>
+                <p class="fs-3">Make sure to deposit 50% of your bill as a down payment to avoid your booking status pending.</p>
+                <br><br>
+                <h1><span class="p-3 w-20 position-absolute top-80 start-50 translate-middle" style="background-color:lightgray; border:0.60px solid green; width:150px;border-radius:4px;" id="transaction_code">{{transaction_code}}</span></h1>
                 <br>
-                <a style="font-family:sans-serif;" href="{% url "reservation_App:code_verification" %}" class="custom-button">Proceed to payment</a>
+                <br>
+                <br><br>
+                <a class="p-4 text-white rounded bg-success fs-3 nav-link no-underline position-absolute top-90 start-50 translate-middle mt-5 border border-info " href="{% url "reservation_App:code_verification" %}" >Proceed to payment</a>
             </div>
-           
         </div>
-{% else %}
-        
-      
-
-    <form action="{% url "reservation_App:room_booking_process" %}" method="POST" id="form" >
-        {% csrf_token %}
- <div class="main-div">
-        <div class="info-div" style="text-align:center;">
-            <center><h2>Guest Information</h2></center>
-            <label for="inputName" class="col-sm-2 col-form-label">Guest Name:</label>
-           
-                <input type="text" name="firstname" class="form-control" id="inputName" placeholder="Enter Name" required>
-       
-            <label for="inputAddress" class="col-sm-2 col-form-label">Guest Lastname:</label>
-           
-                <input type="text" name="lastname" class="form-control" id="inputName" placeholder="Enter Lastname" required>
-   
-            <label for="inputRemarks" class="col-sm-2 col-form-label">Guest Address:</label>
-           
-                <input type="text" name="address" class="form-control" id="inputName" placeholder="Enter Address" required>
-       
-            
-                <label for="formGroupExampleInput" class="form-label">No. of Guest:</label>
-                <input type="number" name="guest_no" class="form-control" id="inputName" placeholder="Enter the Number" required>
-                <center> <label for="inputName" style="width:30%" class="col-sm-2 col-form-label">Date In:</label></center>
-                  
-                <input type="text" name="date_in" class="form-control" id="inputName" placeholder="Select your date"
-                onfocus="this.type='date'" onblur="this.type='text'" required>
-         
-               <center> <label for="inputName" style="width:30%" class="col-sm-2 col-form-label">Date Out:</label></center>
-         
-                <input type="text" name="date_out" class="form-control w-6" id="inputName" placeholder="Select your date"
-                onfocus="this.type='date'" onblur="this.type='text'" required>
-          
-                <center><label for="inputName" style="width:30%" class="col-sm-2 col-form-label">Stay Duration:</label></center>
-               
-                <input type="number" name="duration" class="form-control" id="inputName" required placeholder="Days to stay">
-            
-           
-               <center><label for="inputName" style="width:30%" class="col-sm-2 col-form-label">Time In:</label></center>
-              
-                <input type="text" name="time_in" class="form-control " id="inputName" placeholder="Select Your Time"
-                onfocus="this.type='time'" onblur="this.type='text'" required>
-              
-               <center><label for="inputName" style="width:30%" class="col-sm-2 col-form-label">Time Out:</label></center> 
-         
-                <input type="text" name="time_out" class="form-control " id="inputName" placeholder="Select Your Time"
-                onfocus="this.type='time'" onblur="this.type='text'" required>
-      
-             
-         
-                    
-                   
-         
-  
-
-   </div>
-
-   <div  class="room-div">
-  
-        <center><h2>Room Information</h2></center> 
-        
-            <label for="inputName" class="col-sm-2 col-form-label mr-0">Room Name/No:</label>
-           
-                <input type="text" name="room_no" class="form-control" id="inputName" value="{{room.room_number}}" readonly>
-   
-            <label for="inputName" class="col-sm-2 col-form-label">Gate Number:</label>
-           
-                <input type="text" name="gate_no" class="form-control" id="inputName" readonly value="{{room.gate_number}}" >
+    {% else %}
     
-      
-                    <center><label for="inputName" style="width:30%;text-align:center;" >Room Price:</label></center>
-                    
-                    <input type="text" name="room_price" class="form-control" id="inputName" readonly value="{{room.room_price}}"><br><br>
-               
-                
-                    <label for="" class="form-label">Other services:</label>
-                    <label for="">Available Cottage</label>
-                    <select name="cottage" id="" style="height:45px;">
-                        <option value="">Select Cottage </option>
-                      {% for cottage in cottages %}
-                      <option value="{{cottage.cottage_number}}">Cottage: {{cottage.cottage_number}}</option>
-                      {% empty %}
-                      <option value="">No Available Cottage</option>
-                      {% endfor %}
-                    </select><br><br><br>
-                    <center><label for="formFile" class="form-label">Payment gateway</label></center>
-                    <select name="payment_method" id="" style="width: 60%; height: 35px; outline:none;height:45px; border-radius:4px;">
-                            <option value="" selected disabled hidden>Choose here..</option>
-                            <option value="Gcash">Gcash</option>
-                            <option value="payMaya">payMaya</option>
-                    </select><br><br>
-       
-     
-            <button id='btn' type="submit" class="btn btn-primary" style="width: 30%;">Reserve now</button>
-     
+        <form action="{% url "reservation_App:room_booking_process" %}" method="POST" id="form" class="d-flex justify-content-center align-items-center w-100 vh-">
+            {% csrf_token %}
+            <div class="container-fluid d-flex bg-light">
+          
+            <div class="w-50 place-item-center">
+                <label for="inputName" class="col-sm-2 col-form-label">Guest Name:</label>
+                <input type="text" name="firstname" class="form-control w-100" id="inputName" placeholder="Enter Name" required>
+                <label for="inputAddress" class="col-sm-2 col-form-label">Guest Lastname:</label>
+                <input type="text" name="lastname" class="form-control w-100" id="inputName" placeholder="Enter Lastname" required>
+                <label for="inputRemarks" class="col-sm-2 col-form-label">Guest Address:</label>
+                <input type="text" name="address" class="form-control w-100" id="inputName" placeholder="Enter Address" required>
+                <label for="formGroupExampleInput" class="form-label">No. of Guest:</label>
+                <input type="number" name="guest_no" class="form-control w-100" id="inputName" placeholder="Enter the Number" required>
+                <center><label for="inputName" style="width:30%" class="col-sm-2 col-form-label">Date In:</label></center>
+                <input type="text" name="date_in" class="form-control w-100" id="inputName" placeholder="Select your date" onfocus="this.type='date'" onblur="this.type='text'" required>
+                <center><label for="inputName" style="width:30%" class="col-sm-2 col-form-label">Date Out:</label></center>
+                <input type="text" name="date_out" class="form-control w-100" id="inputName" placeholder="Select your date" onfocus="this.type='date'" onblur="this.type='text'" required>
+                <center><label for="inputName" style="width:30%" class="col-sm-2 col-form-label">Stay Duration:</label></center>
+                <input type="number" name="duration" class="form-control w-100" id="inputName" required placeholder="Days to stay">
+                <center><label for="inputName" style="width:30%" class="col-sm-2 col-form-label">Time In:</label></center>
+                <input type="text" name="time_in" class="form-control w-100" id="inputName" placeholder="Select Your Time" onfocus="this.type='time'" onblur="this.type='text'" required>
+                <center><label for="inputName" style="width:30%" class="col-sm-2 col-form-label">Time Out:</label></center> 
+                <input type="text" name="time_out" class="form-control w-100" id="inputName" placeholder="Select Your Time" onfocus="this.type='time'" onblur="this.type='text'" required>    
+            </div>
+
+            <div class="w-50 place-item-center">
+                 
+                <br><br><br><br><br>
+                <label for="inputName" class="col-lg-2 col-form-label w-100 ">Room Name/No:</label>
+                <input type="text" name="room_no" class="form-control w-20" id="inputName" value="{{room.room_number}}" readonly>
+                <label for="inputName" class="col-sm-2 col-form-label">Gate Number:</label>
+                <input type="text" name="gate_no" class="form-control" id="inputName" readonly value="{{room.gate_number}}">
+                <center><label for="inputName" style="width:30%;text-align:center;">Room Price:</label></center>
+                <input type="text" name="room_price" class="form-control" id="inputName" readonly value="{{room.room_price}}"><br><br>
+                <label for="" class="form-label">Other services:</label>
+                <label for="">Available Cottage</label>
+                <select name="cottage" class="form-control">
+                    <option value="">Select Cottage</option>
+                    {% for cottage in cottages %}
+                        <option value="{{cottage.cottage_number}}">Cottage: {{cottage.cottage_number}}</option>
+                    {% empty %}
+                        <option value="">No Available Cottage</option>
+                    {% endfor %}
+                </select><br><br><br>
+                <center><label for="formFile" class="form-label">Payment gateway</label></center>
+                <select name="payment_method" class="form-control">
+                    <option value="" selected disabled hidden>Choose here..</option>
+                    <option value="Gcash">Gcash</option>
+                    <option value="payMaya">payMaya</option>
+                </select><br><br>
+              <center>  <button id='btn' type="submit" class="btn btn-primary w-50 p-2 text-xl-center" >Reserve now</button></center>
+            </div>    
+            
+        
         </form>
     </div>
-</div>
     {% endif %}
-   <script src="{% static 'js/reservation_form7.js' %}"> </script>
-</body>
 
+    <script src="{% static 'js/reservation_form7.js' %}"></script>
+</body>
 </html>

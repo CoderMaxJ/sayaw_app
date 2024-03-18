@@ -303,55 +303,56 @@ def cottage_booking_process(request):
             
        return render(request,'pages/reservation_form.html')
    
+
 def room_booking_process(request):
-       error_msg=""
-       success_msg="Thank you for visting sayaw resort"
-       current_date = timezone.now()
-       date_Reserved = current_date.strftime("%Y-%m-%d")
-       current_time = timezone.localtime(timezone.now()).time()
-       time_Reserved = current_time.strftime('%H:%M:%S')
-       entrance_Fee=40
-       cottage_price=0
-       if request.method=='POST':
+    error_msg=""
+    success_msg="Thank you for visting sayaw resort"
+    current_date = timezone.now()
+    date_Reserved = current_date.strftime("%Y-%m-%d")
+    current_time = timezone.localtime(timezone.now()).time()
+    time_Reserved = current_time.strftime('%H:%M:%S')
+    entrance_Fee=40
+    cottage_price=0
+    if request.method=='POST':
        
-         length=6
-         characters = string.ascii_letters + string.digits
-         transaction_code=''.join(random.choice(characters) for i in range(length))
+        length=6
+        characters = string.ascii_letters + string.digits
+        transaction_code=''.join(random.choice(characters) for i in range(length))
         
-         firstName=request.POST.get('firstname').capitalize()
-         lastName=request.POST.get('lastname').capitalize()
-         address=request.POST.get('address').capitalize()
-         guest_No=request.POST.get('guest_no')
-         cottage=request.POST.get('cottage')
-         room_No=request.POST.get('room_no')
-         gate_No=request.POST.get('gate_no')
-         room_price=request.POST.get('room_price')
-         date_In=request.POST.get('date_in')
-         date_Out=request.POST.get('date_out')
-         duration=request.POST.get('duration')
-         time_In=request.POST.get('time_in')
-         time_Out=request.POST.get('time_out')
-         payment_method=request.POST.get('payment_method')
+        firstName=request.POST.get('firstname').capitalize()
+        lastName=request.POST.get('lastname').capitalize()
+        address=request.POST.get('address').capitalize()
+        guest_No=request.POST.get('guest_no')
+        cottage=request.POST.get('cottage')
+        room_No=request.POST.get('room_no')
+        gate_No=request.POST.get('gate_no')
+        room_price=request.POST.get('room_price')
+        date_In=request.POST.get('date_in')
+        date_Out=request.POST.get('date_out')
+        duration=request.POST.get('duration')
+        time_In=request.POST.get('time_in')
+        time_Out=request.POST.get('time_out')
+        payment_method=request.POST.get('payment_method')
     
-         guest_No=int(guest_No)
-         duration=int(duration)
+        guest_No=int(guest_No)
+        duration=int(duration)
        
-         room_price=int(room_price)
+        room_price=int(room_price)
         
-         if guest_No > 10 and guest_No <= 15:
+        if guest_No > 10 and guest_No <= 15:
              room_price = 7000
             
-         elif guest_No > 15 :
+        elif guest_No > 15 :
              room_price = 10000 
       
         
-         if room_No !='' or room_No != 0:
-             room=get_object_or_404(rooms,room_number=room_No)
-             room.is_availlable=False
-             room.save()
+        if room_No !='' or room_No != 0:
+            room=get_object_or_404(rooms,room_number=room_No)
+            room.is_availlable=False
+            room.save()
                
         
-         if cottage != '':
+        if cottage != '':
              try:
                  cottage=int(cottage)
                 
@@ -363,7 +364,7 @@ def room_booking_process(request):
                 
                     cottage_price=0
             
-         else:
+        else:
               cottage_price=0
               cottage=0
             
@@ -403,7 +404,7 @@ def room_booking_process(request):
                         return render(request,'pages/reservation_form.html',{'error_msg':error_msg})
             
             
-       return render(request,'pages/reservation_form.html')
+    return render(request,'pages/reservation_form.html')
   
 def transaction_code_checking(request):
      gcash_number=gcash.objects.all()
@@ -930,19 +931,19 @@ def export_to_word(request):
        
          for guest in data:
             document.add_paragraph(f" {guest.guest_name}\t\t {guest.guest_lastname} \t\t{guest.guest_address}\t\t\t {guest.nationality}") 
-            output = BytesIO()
-            document.save(output)
-            response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
-            response['Content-Disposition'] = 'attachment; filename=generated_reports.docx'
-            response.write(output.getvalue())
-            return response
+     output = BytesIO()
+     document.save(output)
+     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+     response['Content-Disposition'] = 'attachment; filename=generated_reports.docx'
+     response.write(output.getvalue())
+     return response
   
     
 
 def feedback(request,id):
      guest=get_object_or_404(paid,id=id)
         
-     return render(request,'user/feedback.html',{'guest':guest})
+     return render(request,'pages/feedback.html',{'guest':guest})
 
 def feedback_process(request):
    
@@ -1043,13 +1044,13 @@ def forgot_code(request):
              try:
                  code=get_object_or_404(booking,guest_Name=firstname,guest_Lastname=lastname)
                  msg="Hey! I found your transaction code!"
-                 return render(request,'user/forgot_code.html',{'msg':msg,'code':code})
+                 return render(request,'pages/forgot_code.html',{'msg':msg,'code':code})
              except Http404:
-                     return render(request,'user/forgot_code.html',{'err':'Cant find you code  :(   make sure to input your information cerrectly.'})
+                     return render(request,'pages/forgot_code.html',{'err':'Cant find you code  :(   make sure to input your information cerrectly.'})
          else:
-              return render(request,'user/forgot_code.html')
+              return render(request,'pages/forgot_code.html')
             
-     return render(request,'user/forgot_code.html')
+     return render(request,'pages/forgot_code.html')
 
 
 def information_dashboard(request):

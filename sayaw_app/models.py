@@ -1,5 +1,5 @@
 
-from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,PermissionsMixin,Group,Permission
 from django.utils import timezone
 from django.db import models
 
@@ -40,6 +40,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'username'
 
+    # Add related_name for groups and user_permissions
+    groups = models.ManyToManyField(Group, blank=True, related_name='custom_user_groups')
+    user_permissions = models.ManyToManyField(Permission, blank=True, related_name='custom_user_permissions')
 
 
 class rooms(models.Model):
