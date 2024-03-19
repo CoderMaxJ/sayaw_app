@@ -1067,6 +1067,6 @@ def guest_dashboard(request):
 
 
 def changeSchedule(request):
-     return render(request,'user/changeschedule_form.html')
+     return render(request,'pages/changeschedule_form.html')
 
 

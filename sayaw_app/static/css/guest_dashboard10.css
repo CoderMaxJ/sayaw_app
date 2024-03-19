@@ -43,8 +43,8 @@ margin-left: 2px;
     width: 100%;
     border: 0.60px solid gray;
     display: flex;
-   justify-content: center;
-    align-items: center;
+   /* justify-content: center;
+    align-items: center; */
 }
 
 label{
@@ -65,8 +65,9 @@ p{
     margin-left: 30px;
     margin-right: 10px;
 }
-.side-div .label-class{
+.side-div {
     margin-left: 30px;
+   
 }
 .right-div{
     width: 50%;
@@ -96,14 +97,14 @@ p{
     border-radius: 4px;
     
 }
-.address button{
+/* .address button{
     padding: 9px;
     width: 100px;
     background-color: orange;
     outline: none;
     border: none;
     border-radius: 4px;
-}
+} */
 
 
 
@@ -111,7 +112,7 @@ p{
 
 
 
-button {
+/* button {
     background-color: #4caf50;
     color: #fff;
     padding: 13px;
@@ -119,7 +120,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
-}
+} */
 
 button:hover {
     background-color: #45a049;
