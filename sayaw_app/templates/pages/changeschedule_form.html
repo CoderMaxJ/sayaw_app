@@ -6,12 +6,16 @@
     <title>Change Schedule</title>
 </head>
 <body>
-    <form action="">
+
+    <h1>{{info.guest_Name}}</h1>
+    <form action="{% url "reservation_App:changeschedule" info.id%}" method="POST">
+        {% csrf_token %}
     <center><div><br><br>
+        <center><input type="hidden" name="id"></center>
         <center><label for="">Reason for changing booking schedule </label></center><br>
-        <center><textarea placeholder="Type your reason here..." name="" id="" cols="30" rows="10"></textarea></center><br>
-        <center><label for="">Preferable date:</label><input type="date"></center><br>
-        <center><label for="">Time: </label> <input type="time"></center><br><br>
+        <center><textarea placeholder="Type your reason here..." name="reason" id="" cols="30" rows="10"></textarea></center><br>
+        <center><label for="">Preferable date:</label><input type="date" name="date"></center><br>
+        <center><label for="">Time: </label> <input type="time" name="time"></center><br><br>
         <center></center><br><br>
         <center><button type="submit">Submit</button></center>
     </div></center>
@@ -20,18 +24,19 @@
 </form>
 
 <style>
-    body{
-        background-color:#333;
-    }
+  body{
+    background-color:lightblue;
+  }
     div{
         margin-top:20vh;
         width:50%;
-        background-color:gainsboro;
+        background-color:lightblue;
         height:70vh;
-        border-radius:3px;
+        border-radius:7px;
+
     }
     label{
-        font-size:25px;
+        font-size:23px;
     }
     textarea{
         width:90%;
@@ -40,17 +45,17 @@
     }
 
     input{
-        font-size:20px;
+        font-size:17px;
         padding:10px;
         border-radius:5px;
         border:0.5px solid gray;
     }
 button{
     padding:10px;
-    background-color:lightblue;
+    background-color:gainsboro;
     width:50%;
-    border:none;outline:none;
-    border-radius:3px;
+    border:0.70px solid green;
+    border-radius:7px;
     font-size:18px;
 }
 button:hover{
@@ -62,7 +67,7 @@ background-color:green;
             width:100%;
         }
         textarea{
-            font-size:27px;
+            font-size:23px;
             font-family:sans-serif;
             
         }

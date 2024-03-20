@@ -686,11 +686,12 @@ def track_records(request):
 
 
 def view_rooms(request):
-     all_rooms=rooms.objects.all()
+     all_rooms=rooms.objects.all()[:15]
+     occupied_date=booking.objects.all()
      all_cottage=cottages.objects.all()
      return render(request,'pages/view_services.html',{"all_rooms":all_rooms,
                                             "all_cottages":all_cottage,
-                                            })
+                                            "occupied_date":occupied_date})
     
 def guest_list(request):
      guest_records=Guest_list.objects.all().order_by('guest_name')
@@ -743,7 +744,7 @@ def cancel_booking(request):
 
 def cancel_bookings_view(request):
 
-     guest=booking.objects.filter(is_cancel=True)
+    #  guest=booking.objects.filter(changeschedule_reason == '')  NEED TO FIX
      return render(request,'pages/cancel_booking.html',{'cancel':guest})
 
 
@@ -955,10 +956,10 @@ def feedback_process(request):
          subject.feedback=message
          subject.save()
         
-         return render(request,'user/feedback.html',{'subject':subject,'message':'Feedback Sent'})
+         return render(request,'pages/feedback.html',{'subject':subject,'message':'Feedback Sent'})
 
   
-     return render(request,'user/feedback.html')
+     return render(request,'pages/feedback.html')
 
 
 
@@ -968,14 +969,14 @@ def insert_number(request):
          paymaya_number=request.POST.get("paymaya")
          paymaya.objects.update(number=paymaya_number)
          gcash.objects.update(number=gcash_number)
-     return render(request,'user/manage_Establishment.html',{"suc":"Phone number save successfully"})
+     return render(request,'pages/manage_Establishment.html',{"suc":"Phone number save successfully"})
 
 
 def clear_feedback(request):
      if request.method=="POST":
         booking.objects.filter(is_paid = True).update(feedback="")
         return redirect(reverse('reservation_App:goto_paidlist'))
-     return render(request,'user/manage_Establishment.html')
+     return render(request,'pages/manage_Establishment.html')
     
         
         
@@ -1066,7 +1067,22 @@ def guest_dashboard(request):
      return render(request,'user/guest_dashboard.html')
 
 
-def changeSchedule(request):
-     return render(request,'pages/changeschedule_form.html')
+def changeSchedule(request,id):
+     details=get_object_or_404(booking,id=id)
+     if request.method=="POST":
+       
+        id=request.POST.get("id")
+        reason=request.POST.get("reason")
+        date=request.POST.get("date")
+        time=request.POST.get("time")
+        details.date_In=date
+        details.time_In=time
+        details.changeschedule_reason=reason
+     details.save()
+     return render(request,'pages/changeschedule_form.html',{'info':details})
+
+# def changing_scedule_process(request,id):
+#      details=get_object_or_404(booking,id=id)
+#      return render(request,'pages/changeschedule_form.html',{"info":details})
 
 

@@ -27,12 +27,12 @@
   <form action="{% url "reservation_App:approve_cancellation" %}" method="POST">
     {% csrf_token %}
     {% if guest.is_cancellation_approve %}
-    <td  style="text-align:center;"><button style="background-color:green;color:black;margin-left:10px;" type="submit">Approved</button></td>
+        <td  style="text-align:center;"><button style="background-color:green;color:black;margin-left:10px;" type="submit">Approved</button></td>
     {% else %}
-    <td  style="text-align:center;"><button style="background-color:orange;color:black;margin-left:10px;width:130px;" type="submit">Approve</button></td>
+        <td  style="text-align:center;"><button style="background-color:orange;color:black;margin-left:10px;width:130px;" type="submit">Approve</button></td>
 
     {% endif %}     
-    <input type="hidden" name="transaction_code" value="{{guest.transaction_Code}}">
+        <input type="hidden" name="transaction_code" value="{{guest.transaction_Code}}">
  
    
 </form>

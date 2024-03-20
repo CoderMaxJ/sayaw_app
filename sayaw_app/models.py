@@ -100,6 +100,7 @@ class booking(models.Model):
     partial_paid=models.IntegerField(default=0)
     total_bill=models.IntegerField(default=0)
     balance_bill=models.IntegerField(default=0)
+    changeschedule_reason=models.TextField(null=True)
     
     def __str__(self):
         return self.guest_Name

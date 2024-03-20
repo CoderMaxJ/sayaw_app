@@ -24,6 +24,14 @@
     </nav>
 
     <main>
+                        <div class="w-100 h-50 bg-light ">
+                            <br><br><br><br><br>
+                            <h2>Reserved date</h2>
+                            {% for occupied in occupied_date %}
+                            
+                            <p class="text-danger">{{occupied.date_In}} - Room: <span style="">{{occupied.room_number}}</span></p>
+                            {% endfor %}
+                        </div>
       <br><br><br><br>
        
         <div class="room-storage">

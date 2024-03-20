@@ -57,7 +57,8 @@ urlpatterns = [
     path('code-tracking-process/', views.forgot_code, name="track-code"),
     path('collections', views.information_dashboard, name="information_dashboard"),
     path('guest-record-status-booking/',views.guest_dashboard, name="guest-dashboard"),
-    path('change-Schedule/',views.changeSchedule, name="changeschedule"),
+    path('change-Schedule/<int:id>',views.changeSchedule, name="changeschedule"),
+    
     path('export-to-word/', views.export_to_word, name="export_to_word"),
     # path('Developer-security/', views.security, name="testing")
     

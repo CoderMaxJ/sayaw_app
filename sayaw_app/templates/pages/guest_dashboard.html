@@ -18,13 +18,13 @@
         <div class="w-100 bg-primary d-flex p-3">
             <label for="" class="name fs-6 mt-2">Name: </label><p class="fs-6 mt-2">{{guest.guest_Name}} {{guest.guest_Lastname}}</p>
             <label for="" class="address fs-6 mt-2">Address: </label><p class="fs-6 mt-2">{{guest.guest_Address}}</p>
-            <label for="" class="address fs-6 mt-2">Booking Status: </label> {% if guest.is_paid == True %} <p class="fs-6 mt-2 text-dark" style="color:white; margin-left:0px;">Approved</p> {% elif guest.is_cancel == True %} <p class="mt-2 fs-6" style="color:maroon;"> Requesting for cancellation </p> {% else %} <p class="fs-6 mt-2 text-warning">Pending</p> {% endif %}<p></p>
+            <label for="" class="address fs-6 mt-2">Booking Status: </label> {% if guest.is_paid == True %} <p class="fs-6  text-white border p-2 rounded bg-success">Approved</p> {% elif guest.is_cancel == True %} <p class="mt-2 fs-6" style="color:maroon;"> Requesting for cancellation </p> {% else %} <p class="fs-6  text-dark border p-2 bg-warning rounded">Pending</p> {% endif %}<p></p>
            
            
         </div>
         <div class="w-100 d-flex p-3">
             <label for="" class="address fs-6 mt-2">Message</label>
-            <a class="address" href="{% url "reservation_App:changeschedule" %}"><button class="btn btn-primary">Change schedule</button></a>
+            <a class="address" href="{% url "reservation_App:changeschedule" guest.id %}"><button class="btn btn-primary">Change schedule</button></a>
             {% if guest.partial_paid == guest.total_bill  %}
             {% else %}
             {% if guest.payment_method == 'Gcash' %}
@@ -36,8 +36,8 @@
             {% endif %}
         </div>
         <div class="container-fuild  d-flex" style="background-color:#006b7f;">
-            <div class="w-50 d-flex">
-                <div class="label-div">
+            <div class="w-50 d-flex ">
+                <div class="label-div ml-4 w-20">
                     <br><br>
                     <label for="" class="label-class fs-6 ml-3">No. of Guests:</label><br><br>
                     <label for="" class="label-class fs-6 ">Room Number:</label><br><br>
@@ -53,7 +53,7 @@
                     <label for="" class="label-class fs-6">Payment Method:</label><br><br>
                 </div>
 
-                <div class="w-50">
+                <div class="w-50 ml-5">
                     <br><br>
                     <label class="fs-6" for="">{{guest.guest_Number}}</label><br><br>
                     <label class="fs-6" for="">{{guest.room_number}}</label><br><br>
