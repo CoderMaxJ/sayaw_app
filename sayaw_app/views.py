@@ -738,13 +738,13 @@ def cancel_booking(request):
      if request.method=='POST':
          transaction_code=request.POST.get('transaction_code')
          guest=get_object_or_404(booking,transaction_Code=transaction_code)
-         guest.is_cancel=True
+         guest.changeschedule_approve=True
          guest.save()  
      return render(request,'pages/guest_dashboard.html',{'guest':guest})
 
-def cancel_bookings_view(request):
+def change_schedule(request):
 
-    #  guest=booking.objects.filter(changeschedule_reason == '')  NEED TO FIX
+     guest=booking.objects.filter(change_schedule=True)
      return render(request,'pages/cancel_booking.html',{'cancel':guest})
 
 
@@ -752,11 +752,11 @@ def approve_cancellation(request):
      if request.method=="POST":
          transaction_code=request.POST.get('transaction_code')
          guest=get_object_or_404(booking, transaction_Code=transaction_code)
-         if guest.is_cancellation_approve==False:
-             guest.is_cancellation_approve=True
+         if guest.change_schedule==False:
+             guest.changeschedule_approve=True
              guest.save()
-         elif guest.is_cancellation_approve==True:
-             guest.is_cancellation_approve=False
+         elif guest.change_schedule==True:
+             guest.changeschedule_approve=False
              guest.save()
          return redirect(reverse('reservation_App:cancel-list'))
     
@@ -1078,6 +1078,7 @@ def changeSchedule(request,id):
         details.date_In=date
         details.time_In=time
         details.changeschedule_reason=reason
+        details.change_schedule=True
      details.save()
      return render(request,'pages/changeschedule_form.html',{'info':details})
 
