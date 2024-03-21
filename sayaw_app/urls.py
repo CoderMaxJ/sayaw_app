@@ -60,6 +60,7 @@ urlpatterns = [
     path('change-Schedule/<int:id>',views.changeSchedule, name="changeschedule"),
     
     path('export-to-word/', views.export_to_word, name="export_to_word"),
+   
     # path('Developer-security/', views.security, name="testing")
     
    
