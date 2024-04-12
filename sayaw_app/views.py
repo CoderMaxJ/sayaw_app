@@ -437,6 +437,7 @@ def pay(request):
      date_Reserved = current_date.strftime("%Y-%m-%d")
      current_time = timezone.localtime(timezone.now()).time()
      time_Reserved = current_time.strftime('%H:%M:%S')
+
      error_msg=''
      success_msg=''
      if request.method=="POST":

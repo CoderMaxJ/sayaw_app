@@ -40,79 +40,80 @@
 
     <form action="{% url "reservation_App:cottage_booking_process" %}" method="POST" id="form" >
         {% csrf_token %}
- <div class="main-div">
-        <div class="info-div" style="text-align:center;">
-            <center><h2>Guest Information</h2></center>
-            <label for="inputName" class="col-sm-2 col-form-label">Guest Name:</label>
-           
-                <input type="text" name="firstname" class="form-control" id="inputName" placeholder="Enter Name" required>
-       
-            <label for="inputAddress" class="col-sm-2 col-form-label">Guest Lastname:</label>
-           
-                <input type="text" name="lastname" class="form-control" id="inputName" placeholder="Enter Lastname" required>
+        <center><h2>Guest Information</h2></center>
+        
+ <div class="container-fluid d-flex bg-light">
    
-            <label for="inputRemarks" class="col-sm-2 col-form-label">Guest Address:</label>
+        <div class="w-50 place-item-center">
+         
+            <label for="inputName" class="col-sm-2 col-form-label w-100 p-3">Guest Name:</label>
            
-                <input type="text" name="address" class="form-control" id="inputName" placeholder="Enter Address" required>
+                <input type="text" name="firstname" class="form-control w-100 p-3" id="inputName" placeholder="Enter Name" required>
+       
+            <label for="inputAddress" class="col-sm-2 col-form-label w-100 p-3">Guest Lastname:</label>
+           
+                <input type="text" name="lastname" class="form-control w-100 p-3" id="inputName" placeholder="Enter Lastname" required>
+   
+            <label for="inputRemarks" class="col-sm-2 col-form-label w-100 p-3">Guest Address:</label>
+           
+                <input type="text" name="address" class="form-control w-100 p-3" id="inputName" placeholder="Enter Address" required>
        
             
-                <label for="formGroupExampleInput" class="form-label">No. of Guest:</label>
-                <input type="number" name="guest_no" class="form-control" id="inputName" placeholder="Enter the Number" required>
-                <center> <label for="inputName" style="width:30%" class="col-sm-2 col-form-label">Date In:</label></center>
+                <label for="formGroupExampleInput" class="form-label p-3">No. of Guest:</label>
+                <input type="number" name="guest_no" class="form-control w-100 p-3" id="inputName" placeholder="Enter the Number" required>
+               <label for="inputName" style="width:30%" class="col-sm-2 col-form-label w-100 p-3">Date In:</label>
                   
-                <input type="text" name="date_in" class="form-control" id="inputName" placeholder="Select your date"
+                <input type="text" name="date_in" class="form-control w-100 p-3" id="inputName" placeholder="Select your date"
                 onfocus="this.type='date'" onblur="this.type='text'" required>
          
-               <center> <label for="inputName" style="width:30%" class="col-sm-2 col-form-label">Date Out:</label></center>
+              <label for="inputName" style="width:30%" class="col-sm-2 col-form-label w-100 p-3">Date Out:</label>
          
                 <input type="text" name="date_out" class="form-control w-6" id="inputName" placeholder="Select your date"
                 onfocus="this.type='date'" onblur="this.type='text'" required>
           
-                <center><label for="inputName" style="width:30%" class="col-sm-2 col-form-label">Stay Duration:</label></center>
+              <label for="inputName" style="width:30%" class="col-sm-2 col-form-label w-100 p-3">Stay Duration:</label>
                
-                <input type="number" name="duration" class="form-control" id="inputName" required placeholder="Days to stay">
+                <input type="number" name="duration" class="form-control w-100 p-3" id="inputName" required placeholder="Days to stay">
             
            
-               <center><label for="inputName" style="width:30%" class="col-sm-2 col-form-label">Time In:</label></center>
+               <label for="inputName" style="width:30%" class="col-sm-2 col-form-label w-100 p-3">Time In:</label>
               
-                <input type="text" name="time_in" class="form-control " id="inputName" placeholder="Select Your Time"
+                <input type="text" name="time_in" class="form-control p-3 " id="inputName" placeholder="Select Your Time"
                 onfocus="this.type='time'" onblur="this.type='text'" required>
               
-               <center><label for="inputName" style="width:30%" class="col-sm-2 col-form-label">Time Out:</label></center> 
+               <center><label for="inputName" style="width:30%" class="col-sm-2 col-form-label w-100 p-3">Time Out:</label></center> 
          
-                <input type="text" name="time_out" class="form-control " id="inputName" placeholder="Select Your Time"
+                <input type="text" name="time_out" class="form-control p-3 " id="inputName" placeholder="Select Your Time"
                 onfocus="this.type='time'" onblur="this.type='text'" required>
       
              
-         
+         </div>
                     
                    
          
   
 
-   </div>
 
-   <div  class="room-div">
+
+   <div  class="w-50 place-item-center">
   
-        <center><h2>Cottage Information</h2></center> 
-        
-            <label for="inputName" class="col-sm-2 col-form-label mr-0">Cottage No.:</label>
+            <label for="inputName" class="w-100 col-sm-2 col-form-label mt-2">Cottage No.:</label>
            
-                <input type="text" name="cottage" class="form-control" id="inputName" value="{{cottage.cottage_number}}" readonly>
+                <input type="text" name="cottage" class="form-control w-100 p-3 mt-2" id="inputName" value="{{cottage.cottage_number}}" readonly>
    
-            <label for="inputName" class="col-sm-2 col-form-label">Gate Number:</label>
+            <label for="inputName" class="col-sm-2 col-form-label w-100 p-3">Gate Number:</label>
            
-                <input type="text" name="gate_no" class="form-control" id="inputName" readonly value="{{cottage.gate_number}}" >
+                <input type="text" name="gate_no" class="form-control w-100 p-3" id="inputName" readonly value="{{cottage.gate_number}}" >
     
       
-                    <center><label for="inputName" style="width:30%;text-align:center;" >Cottage price:</label></center>
+                    <label for="inputName" style="width:30%;text-align:center;" class="mt-3" >Cottage price:</label>
                     
-                    <input type="text" name="cottage_price" class="form-control" id="inputName" readonly value="{{cottage.cottage_price}}"><br><br>
+                    <input type="text" name="cottage_price" class="form-control w-100 p-3 mt-3" id="inputName" readonly value="{{cottage.cottage_price}}">
                
                 
-                    <label for="" class="form-label">Other services:</label>
+                    <label for="" class="form-label p-3">Other services:</label>
                     <label for="">Available rooms</label>
-                    <select name="room" id="">
+                    <select name="room" id=""  class="form-control w-100 p-3">
                         <option value="">Select Rooms </option>
                       {% for room in rooms %}
                       <option value="{{room.room_number}}">Room: {{room.room_number}}</option>
@@ -121,7 +122,7 @@
                       {% endfor %}
                     </select><br>
                     <center><label for="formFile" class="form-label">Payment gateway</label></center>
-                    <select name="payment_method" id="" style="width: 60%; height: 35px; outline:none; border-radius:4px;">
+                    <select name="payment_method" id=""  class="form-control w-100 p-3">
                             <option value="" selected disabled hidden>Choose here..</option>
                             <option value="Gcash">Gcash</option>
                             <option value="payMaya">payMaya</option>
@@ -129,7 +130,7 @@
                     <br><br><br><br>
        
      
-            <button id='btn' type="submit" class="btn btn-primary" style="width: 30%;">Reserve now</button>
+            <center><button id='btn' type="submit" class="btn btn-primary w-50 p-3" style="width: 30%;">Reserve now</button></center>
      
         </form>
     </div>

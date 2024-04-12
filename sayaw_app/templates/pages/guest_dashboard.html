@@ -76,7 +76,7 @@
             <div class="right-div" style="background-color:#006b7f;">
                 <div class="d-flex">
                     <label class="mt-2 ml-3 fs-4"  for="">Total bill:</label> <p class="mt-2 fs-4 text-warning">{{guest.total_bill|intcomma}}</p>
-                    {% if guest.is_cancel == False %}
+                    {% if guest.is_paid == False %}
                     {% if guest.is_fully_paid == False %}
                     <button type="button" id="button" style="margin-left:20px;" class="pay">Pay</button>
                     {% else %}
