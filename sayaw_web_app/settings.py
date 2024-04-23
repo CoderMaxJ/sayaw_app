@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sayaw_database',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '@Codermaxj555',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
