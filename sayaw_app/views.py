@@ -216,7 +216,7 @@ def cottage_booking_process(request):
       
          cottage_price=request.POST.get('cottage_price')
          room=request.POST.get('room')
-         cottage=request.POST.get('cottage')
+         cottage=request.POST.get('cottage_no')
          gate_No=request.POST.get('gate_no')
          date_In=request.POST.get('date_in')
          date_Out=request.POST.get('date_out')
@@ -225,6 +225,10 @@ def cottage_booking_process(request):
          time_Out=request.POST.get('time_out')
          payment_method=request.POST.get('payment_method')
          cottage_price=int(cottage_price)
+
+
+        # Get form data and capitalize names and address
+    
         
          if cottage != '':
              cottage=int(cottage)
@@ -333,7 +337,7 @@ def room_booking_process(request):
         time_In=request.POST.get('time_in')
         time_Out=request.POST.get('time_out')
         payment_method=request.POST.get('payment_method')
-    
+        
         guest_No=int(guest_No)
         duration=int(duration)
        
@@ -341,7 +345,7 @@ def room_booking_process(request):
         
         if guest_No > 10 and guest_No <= 15:
              room_price = 7000
-            
+         
         elif guest_No > 15 :
              room_price = 10000 
       
