@@ -72,13 +72,13 @@
                 {% comment %} <center><label for="inputName" id="val" name="room_price"  value="{{room.room_price}}" class="col-lg-2 col-form-label w-100 p-3 fs-5 border bg-success text-light">Room Price: <span>{{room.room_price}}</span></label></center><br><br> {% endcomment %}
                 
                <center> <label for="inputName" class="mt-2 col-lg-2 col-form-label w-100 p-3 fs-5">Available Cottage</label></center>
-                <select name="cottage_no" class="form-control p-3 fs-5">
-                    <option value="" class="fs-5">Select Cottage</option>
-                    {% for cottage in cottages %}
+                <select name="cottage" class="form-control p-3 fs-5" >
+                        <option value="" disabled selected hidden >Add cottage</option>
+                         {% for cottage in cottages %}
                         <option value="{{cottage.cottage_number}}">Cottage: {{cottage.cottage_number}}</option>
                     {% empty %}
                         <option value="">No Available Cottage</option>
-                    {% endfor %}
+                    {% endfor %} 
                 </select>
                 <center><label for="formFile" class="form-label mt-4 p-3 fs-5">Payment gateway</label></center><br><br>
                 <select name="payment_method" class="form-control p-3 mt-5 fs-5">

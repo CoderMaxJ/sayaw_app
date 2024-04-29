@@ -337,7 +337,7 @@ def room_booking_process(request):
         time_In=request.POST.get('time_in')
         time_Out=request.POST.get('time_out')
         payment_method=request.POST.get('payment_method')
-        
+
         guest_No=int(guest_No)
         duration=int(duration)
        
@@ -364,7 +364,7 @@ def room_booking_process(request):
                  reserved.is_availlable=False
                  cottage_price=reserved.cottage_price
                  reserved.save()
-             except:
+             except Http404:
                 
                     cottage_price=0
             
