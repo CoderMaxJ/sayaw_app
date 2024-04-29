@@ -338,6 +338,14 @@ def room_booking_process(request):
         time_Out=request.POST.get('time_out')
         payment_method=request.POST.get('payment_method')
 
+
+        form_data = [firstName, lastName, address, guest_No, cottage, room_No, gate_No,
+             room_price, date_In, date_Out, duration, time_In, time_Out,
+             payment_method]
+        
+        for data in form_data:
+             print(data)
+
         guest_No=int(guest_No)
         duration=int(duration)
        
@@ -373,13 +381,13 @@ def room_booking_process(request):
               cottage=0
             
      
-              if duration!=0:
+        if duration != 0:
                     room_price=room_price*duration
         
                     total_bill=(entrance_Fee*guest_No)+room_price+cottage_price
                     # total_bill=guest_No*entrance_Fee+(room_price+table_price+cottage_price)
                     if firstName !='' and lastName !='' and address !=''  and guest_No !='' and date_In !='' and date_Out != '' and duration != '' and time_In != '' and time_Out !='':
-                        collecting_data=booking(payment_method=payment_method,
+                       collecting_data=booking(payment_method=payment_method,
                                      date_Reserved=date_Reserved,
                                      time_Reserved=time_Reserved,
                                      transaction_Code=transaction_code,
@@ -398,8 +406,8 @@ def room_booking_process(request):
                                      time_In=time_In,
                                      time_Out=time_Out,
                                      total_bill=total_bill)
-                        collecting_data.save()
-                        return render(request,'pages/reservation_form.html',{'transaction_code':transaction_code,'success_msg':success_msg})
+                       collecting_data.save()
+                       return render(request,'pages/reservation_form.html',{'transaction_code':transaction_code,'success_msg':success_msg})
           
             
                     else:
