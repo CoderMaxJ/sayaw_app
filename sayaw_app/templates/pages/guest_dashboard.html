@@ -24,7 +24,7 @@
         </div>
         <div class="w-100 d-flex p-3">
             <label for="" class="address fs-6 mt-2">Message</label>
-            <a class="address" href="{% url "reservation_App:changeschedule" guest.id %}"><button class="btn btn-primary">Change schedule</button></a>
+            <a class="address" href="{% url "reservation_App:changeschedule" %}"><button class="btn btn-primary">Change schedule</button></a>
             {% if guest.partial_paid == guest.total_bill  %}
             {% else %}
             {% if guest.payment_method == 'Gcash' %}

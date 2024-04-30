@@ -43,9 +43,9 @@
                     <div class="room-details">
                         <div class="link-box">
                                 {% if room.is_availlable %}
-                                <a class="link" href="{% url 'reservation_App:room_booking_view' room.id %}"><button class="book-now">Book now</button></a>
+                                <a class="link" href="{% url 'reservation_App:room_booking_view' room.id %}"><button class="bg-primary text-white border pt-2 pb-2 w-20 rounded mt-2">Book now</button></a>
                                 {% else %}
-                                <a style="background-color:#0056b3" class="link" href="{% url 'reservation_App:view_photos' room.id%}"><button style="background-color:#0056b3" class="book-now">View</button></a>
+                                <a style="background-color:#0056b3" class="link" href="{% url 'reservation_App:view_photos' room.id%}"><button  class="bg-danger text-white border pt-2 pb-2 w-50 rounded mt-2">View</button></a>
                                 {% endif %}
                         </div>
                         <span class="service-status">
@@ -73,9 +73,9 @@
                     <div class="room-details">
                         <div class="link-box">
                                 {% if cottage.is_availlable %}
-                                <a class="link" href="{% url "reservation_App:cottage_booking" cottage.id%}"><button  class="book-now">Book now</button></a>
+                                <a class="link" href="{% url "reservation_App:cottage_booking" cottage.id%}"><button  class="bg-primary text-white border pt-2 pb-2 w-20 rounded mt-2">Book now</button></a>
                                 {% else %}
-                                <a style="background-color:#0056b3" class="link" href="{% url 'reservation_App:view_photos' cottage.id%}"><button style="background-color:#0056b3" class="book-now">View</button></a>
+                                <a style="background-color:#0056b3" class="link" href="{% url 'reservation_App:view_photos' cottage.id%}"><button class="bg-danger text-white border pt-2 pb-2 w-50 rounded mt-2" >View</button></a>
                                 {% endif %}
                         </div>
                         <span class="service-status">

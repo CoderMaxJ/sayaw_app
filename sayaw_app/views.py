@@ -216,7 +216,7 @@ def cottage_booking_process(request):
       
          cottage_price=request.POST.get('cottage_price')
          room=request.POST.get('room')
-         cottage=request.POST.get('cottage_no')
+         cottage=request.POST.get('cottage')
          gate_No=request.POST.get('gate_no')
          date_In=request.POST.get('date_in')
          date_Out=request.POST.get('date_out')
