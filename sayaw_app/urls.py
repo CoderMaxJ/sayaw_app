@@ -58,6 +58,7 @@ urlpatterns = [
     path('collections', views.information_dashboard, name="information_dashboard"),
     path('guest-record-status-booking/',views.guest_dashboard, name="guest-dashboard"),
     path('change-Schedule/<int:id>',views.changeSchedule, name="changeschedule"),
+    path('greet', views.greetingpage, name="greeting"),
     
     path('export-to-word/', views.export_to_word, name="export_to_word"),
    

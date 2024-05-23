@@ -449,7 +449,7 @@ def pay(request):
      date_Reserved = current_date.strftime("%Y-%m-%d")
      current_time = timezone.localtime(timezone.now()).time()
      time_Reserved = current_time.strftime('%H:%M:%S')
-
+     guest = booking.objects.all()
      error_msg=''
      success_msg=''
      if request.method=="POST":
@@ -467,7 +467,7 @@ def pay(request):
              money.save()
              success_msg='Payment Sent!'
            
-             return render(request,'pages/guest_dashboard.html',{'success_msg':success_msg,'guestname':guest_name,'guestlastname':guest_lastname})    
+             return render(request,'pages/guest_dashboard.html',{'success_msg':success_msg,'guestname':guest_name,'guestlastname':guest_lastname,"guest":guest})    
          else:
              error_msg='There was an issue while trying to send !!!'
              return render(request,'pages/guest_dashboard.html',{'error_msg':error_msg})
@@ -1100,3 +1100,6 @@ def changeSchedule(request,id):
 #      return render(request,'pages/changeschedule_form.html',{"info":details})
 
 
+def greetingpage(request):
+     
+     return render(request,'pages/paid_greeting.html')
