@@ -4,7 +4,7 @@
    
 <head>
     {% block title %}Guest Records{% endblock  %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/admin_dashboard36.css' %}">
 </head>
 
@@ -65,7 +65,8 @@
             <button type="button" style="pointer-events:none;"  class="btn btn-succes">Fully paid</button>
             {% else %}
             <input  type="number" class="form-control" name="partial_amount" placeholder="Enter the Amount" required>
-            <button type="submit" style="background-color:green;margin-left:10px;" class="btn btn-primary">Turn Paid</button>
+            {% comment %} <button type="submit"  class="btn btn-success">Turn Paid</button> {% endcomment %}
+           <input type="submit" class="btn btn-success w-100">
             {% endif %}
         </form></center>
     </div>
@@ -111,7 +112,7 @@
 
             <label for="">Total bill:</label>
           
-            <input type="text" style="background-color:orange; font-size:22px;" value="{{guest.total_bill|intcomma}}"  readonly>
+            <input type="text" style="background-color:orange; font-size:22px;" value="{{guest.total_bill|intcomma}}"  readonly><br>
             <label for="">Partial paid:</label>
             <input type="text" style="background-color:orange; font-size:22px;" value="{{guest.partial_paid|intcomma}}"  readonly>
             <label for="">Balance bill:</label>

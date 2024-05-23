@@ -172,3 +172,10 @@ class paymaya(models.Model):
     number=models.CharField(max_length=11)
 
 
+class change_schedule(models.Model):
+    reason=models.TextField(max_length=500)
+    date=models.DateField()
+    time=models.TimeField()
+
+    def __str__(self):
+        return self.date

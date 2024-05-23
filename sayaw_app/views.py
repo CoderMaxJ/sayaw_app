@@ -458,16 +458,22 @@ def pay(request):
          imageUpload=request.FILES.get('imageUpload')
          transaction_code=request.POST.get('transaction_code')
          total_bill=request.POST.get('total_bill')
+
+         if imageUpload == '':
+             return HttpResponse("<h1>no value</h1>")
+
          if guest_name and transaction_code and imageUpload and total_bill and guest_lastname:
              money=paid(guest_name=guest_name,
                     payment_proof=imageUpload,
                     transaction_code=transaction_code,
                     date_paid=date_Reserved,
-                    time_paid=time_Reserved,total_bill=total_bill,guest_lastname=guest_lastname)
+                    time_paid=time_Reserved,
+                    total_bill=total_bill,
+                    guest_lastname=guest_lastname)
              money.save()
              success_msg='Payment Sent!'
            
-             return render(request,'pages/guest_dashboard.html',{'success_msg':success_msg,'guestname':guest_name,'guestlastname':guest_lastname,"guest":guest})    
+             return render(request,'pages/paid_greeting.html',{'success_msg':success_msg,'guestname':guest_name,'guestlastname':guest_lastname,"guest":guest})    
          else:
              error_msg='There was an issue while trying to send !!!'
              return render(request,'pages/guest_dashboard.html',{'error_msg':error_msg})

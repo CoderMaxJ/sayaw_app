@@ -8,7 +8,7 @@
 <body>
 
     <h1>{{info.guest_Name}}</h1>
-    <form action="{% url "reservation_App:changeschedule" info.id%}" method="POST">
+    <form action="{% url "reservation_App:cancel_booking"%}" method="POST">
         {% csrf_token %}
     <center><div><br><br>
         <center><input type="hidden" name="id"></center>

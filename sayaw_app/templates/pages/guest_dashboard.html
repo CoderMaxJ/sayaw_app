@@ -78,7 +78,7 @@
                     <label class="mt-2 ml-3 fs-4"  for="">Total bill:</label> <p class="mt-2 fs-4 text-warning">{{guest.total_bill|intcomma}}</p>
                     {% if guest.is_paid == False %}
                     {% if guest.is_fully_paid == False %}
-                    <button type="button" id="button" style="margin-left:20px;" class="pay">Pay</button>
+                    <button type="button" id="button" style="margin-left:20px; padding:10px;" class="pay">Pay</button>
                     {% else %}
                     
                     {% endif %}
@@ -87,7 +87,8 @@
                     {% if guest.is_fully_paid == True %}
                     <p style="margin-left:30px; margin-top:10px;" class="fs-4"> Bill status: <span> <p style="color:blue;" class="fs-4 ml-4 mt-2 text-warning">Fully paid</p> </span> </p>
                     {% elif guest.balance_bill != 0 %}
-                    <p>Balance: {{guest.balance_bill}}</p>
+                   
+                    <p style="margin-top:13px; margin-left:40px;color:orange; font-size:23px;">Balance: {{guest.balance_bill}}</p>
                     {% endif %}
                    
                   
