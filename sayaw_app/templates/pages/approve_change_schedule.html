@@ -1,0 +1,43 @@
+
+{% extends "dashboard.html" %}
+{% load static %}
+{% block title %}|View cancel booking{% endblock  %}
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/admin_dashboard36.css' %}">
+
+</head>
+
+{% block cancel_bookings %}
+<br><br><br><br><br><br><br>
+<table class="booking-table">
+<thead>
+    <th style="text-align:center;">First name</th>
+    <th style="text-align:center;">Lastname</th>
+    <th style="text-align:center;">Address</th>
+    <th style="text-align:center;">Amount deposited</th>
+    <th style="text-align:center">Action</th>
+</thead>
+{% for guest in cancel %}
+<tr>
+    <td class="{% cycle 'odd' 'even' %}" >{{guest.guest_Name}}</td>
+    <td class="{% cycle 'odd' 'even' %}">{{guest.guest_Lastname}}</td>
+    <td class="{% cycle 'odd' 'even' %}">{{guest.guest_Address}}</td>
+    <td class="{% cycle 'odd' 'even' %}"><i class="fa-solid fa-peso-sign fa-beat"></i>  {{guest.partial_paid}}</td>
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% if guest.changeschedule_approve %}
+        <td  style="text-align:center;"><button style="background-color:green;color:black;margin-left:10px;" type="submit">Approved</button></td>
+    {% else %}
+        <td  style="text-align:center;"><button style="background-color:orange;color:black;margin-left:10px;width:130px;" type="submit">Approve</button></td>
+
+    {% endif %}     
+        <input type="hidden" name="transaction_code" value="{{guest.transaction_Code}}">
+ 
+   
+</form>
+</tr>
+{% endfor %}
+
+</table>
+{% endblock  %}

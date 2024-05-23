@@ -37,8 +37,8 @@ urlpatterns = [
     path('sayaw-rooms/<int:id>',views.view_photos, name='view_photos'),
     path('load-data', views.data_loading, name="data-loading"),
     path('chat-box,', views.chat, name="chat"),
-    path('request-to-cancel', views.cancel_booking, name="cancel_booking"),
-    path('cancel-booking-list', views.change_schedule , name="cancel-list"),
+    # path('request-to-cancel', views.cancel_booking, name="cancel_booking"),
+    path('cancel-booking-list', views.change_schedule , name="change_schedule"),
     path('cancellation-approval/', views.approve_cancellation, name="approve_cancellation"),
     path('add-nationality/', views.add_nationality, name="add-nationality"),
     path('refresher', views.refresher, name='refresher'),
@@ -59,6 +59,8 @@ urlpatterns = [
     path('guest-record-status-booking/',views.guest_dashboard, name="guest-dashboard"),
     path('change-Schedule/<int:id>',views.changeSchedule, name="changeschedule"),
     path('greet', views.greetingpage, name="greeting"),
+    path('approve-change-schedule-view/', views.approve_change_schedule_view, name='approve_change_schedule_view'),
+    path('change-schedule-process', views.change_schedule_process, name="change_schedule_process"),
     
     path('export-to-word/', views.export_to_word, name="export_to_word"),
    

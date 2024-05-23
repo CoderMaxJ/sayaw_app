@@ -1,7 +1,7 @@
 
 from django.shortcuts import render,redirect,get_object_or_404,HttpResponse,HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
-from .models import CustomUser,rooms,cottages,booking,paid,Guest_list,nationality,information,message_storage_1,message_storage_2,message_storage_3,gcash,paymaya
+from .models import CustomUser,rooms,cottages,booking,paid,Guest_list,nationality,information,message_storage_1,message_storage_2,message_storage_3,gcash,paymaya,change_schedule
 from .forms import RegistrationForm,loginForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.urls import reverse
@@ -751,20 +751,35 @@ def chat(request):
         
      return render(request, 'pages/chat.html',{'convo':convo})
 
-def cancel_booking(request):
-     guest=booking.objects.all()
+# def cancel_booking(request):
+#      guest=booking.objects.all()
     
-     if request.method=='POST':
-         transaction_code=request.POST.get('transaction_code')
-         guest=get_object_or_404(booking,transaction_Code=transaction_code)
-         guest.changeschedule_approve=True
-         guest.save()  
-     return render(request,'pages/guest_dashboard.html',{'guest':guest})
+#      if request.method=='POST':
+#          transaction_code=request.POST.get('transaction_code')
+#          guest=get_object_or_404(booking,transaction_Code=transaction_code)
+#          guest.changeschedule_approve=True
+#          guest.save()  
+#      return render(request,'pages/guest_dashboard.html',{'guest':guest})
 
-def change_schedule(request):
+def change_schedule_view(request):
+     return render(request,'pages/change_schedule_form.html')
 
-     guest=booking.objects.filter(change_schedule=True)
-     return render(request,'pages/cancel_booking.html',{'cancel':guest})
+def change_schedule_process(request):
+     if request.method=="POST":
+          code=request.POST.get('code', '').strip()
+          reason=request.POST.get('reason', '').strip()
+          date=request.POST.get('date', '').strip()
+          time=request.POST.get('time', '').strip()
+
+          if not code and not reason and not date and not time:
+               return render(request, 'pages/change_schedule_form.html',{"msg":"All fields are required"})
+          else:
+              data=change_schedule(code=code,reason=reason,date=date,time=time)
+              data.save()
+     return render(request,'pages/changeschedule_form.html',{"msg":"Your request to change schedule has submitted"})
+
+def approve_change_schedule_view(request):
+     return render(request,'pages/approve_change_schedule.html')
 
 
 def approve_cancellation(request):

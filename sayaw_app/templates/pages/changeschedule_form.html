@@ -7,72 +7,96 @@
 </head>
 <body>
 
-    <h1>{{info.guest_Name}}</h1>
-    <form action="{% url "reservation_App:cancel_booking"%}" method="POST">
-        {% csrf_token %}
-    <center><div><br><br>
-        <center><input type="hidden" name="id"></center>
-        <center><label for="">Reason for changing booking schedule </label></center><br>
-        <center><textarea placeholder="Type your reason here..." name="reason" id="" cols="30" rows="10"></textarea></center><br>
-        <center><label for="">Preferable date:</label><input type="date" name="date"></center><br>
-        <center><label for="">Time: </label> <input type="time" name="time"></center><br><br>
-        <center></center><br><br>
-        <center><button type="submit">Submit</button></center>
-    </div></center>
 
-    
-</form>
-
-<style>
-  body{
-    background-color:lightblue;
-  }
-    div{
-        margin-top:20vh;
-        width:50%;
-        background-color:lightblue;
-        height:70vh;
-        border-radius:7px;
-
-    }
-    label{
-        font-size:23px;
-    }
-    textarea{
-        width:90%;
-        font-size:20px;
-        border-radius:10px;
-    }
-
-    input{
-        font-size:17px;
-        padding:10px;
-        border-radius:5px;
-        border:0.5px solid gray;
-    }
-button{
-    padding:10px;
-    background-color:gainsboro;
-    width:50%;
-    border:0.70px solid green;
-    border-radius:7px;
-    font-size:18px;
-}
-button:hover{
-color:orange;
-background-color:green;
-}
-    @media  screen and (max-width:768px){
-        div{
-            width:100%;
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Schedule Change Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
         }
-        textarea{
-            font-size:23px;
-            font-family:sans-serif;
-            
+        .form-container {
+            background: #fff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
         }
-    }
+        .form-container h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
 
-</style>
+    <div class="form-container">
+        <h2>Change Booking Schedule</h2>
+<h1>{{info.transaction_Code}}</h1>
+        {{msg}}
+        <form action="{% url "reservation_App:change_schedule_process" %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" value="{{info.transaction_Code}}" name="code">
+            <div class="form-group">
+                <label for="reason">Reason for changing booking schedule</label>
+                <textarea placeholder="Type your reason here..." name="reason" id="reason" cols="30" rows="10"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="date">Preferable date</label>
+                <input type="date" name="date" id="date">
+            </div>
+            <div class="form-group">
+                <label for="time">Time</label>
+                <input type="time" name="time" id="time">
+            </div>
+            <div class="form-group">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
+
 </body>
 </html>
