@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'sayaw_database',
         'USER': 'root',
-        'PASSWORD': '@Codermaxj555',
+        'PASSWORD': '@codermaxj555',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
@@ -140,4 +140,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTH_USER_MODEL='sayaw_app.CustomUser'
+AUTH_USER_MODEL='sayaw_app.CustomUser'
