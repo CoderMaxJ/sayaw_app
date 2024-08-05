@@ -15,7 +15,8 @@ from docx import Document
 from django.http import HttpResponse
 from io import BytesIO
 
-
+def sample():
+    print("sample")
 
 def mainpage(request):
   
