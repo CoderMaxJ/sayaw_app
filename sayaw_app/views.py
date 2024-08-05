@@ -83,7 +83,7 @@ def create_account(request):
                  form = RegistrationForm()
                  return render(request, 'pages/create_account.html', {"form": form})
 
-     return render(request, 'user/create_account.html', {'form': form})
+     return render(request, 'pages/create_account.html', {'form': form})
 
 
 def manage_establisment_view(request):
@@ -366,8 +366,7 @@ def room_booking_process(request):
         
         if cottage != '':
              try:
-                 cottage=int(cottage)
-                
+           
                  reserved=get_object_or_404(cottages,cottage_number=cottage)
                  reserved.is_availlable=False
                  cottage_price=reserved.cottage_price
